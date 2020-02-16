@@ -30,10 +30,12 @@ public class OperationsListGUI extends JFrame {
     private JComboBox endDayComboBox;
     private JComboBox endMonthComboBox;
     private JComboBox endYearComboBox;
+    private JComboBox statusComboBox;
+    private JLabel statusLabel;
 
     public OperationsListGUI() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setBounds(400, 100, 1500, 800);
+        setBounds(100, 100, 1700, 800);
         setContentPane(RootPanel);
         setVisible(true);
     }

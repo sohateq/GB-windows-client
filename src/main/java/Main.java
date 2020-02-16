@@ -1,10 +1,12 @@
+import GUI.OperationsListGUI;
+
 public class Main {
     public static void main(String[] args) {
-//        new OperationsListGUI();
+        new OperationsListGUI();
 //        new CalculateGUI();
 //        new ManagerGUI();
 //        new CustomersListGUI();
 //        new BalanceGUI();
-        ClientController.getProductsStringFromServer();
+//        ClientController.getProductsStringFromServer();
     }
 }
