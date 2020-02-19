@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.Date;
 import java.util.List;
 
 public abstract class DataBaseController {
@@ -21,30 +22,28 @@ public abstract class DataBaseController {
             e.printStackTrace();
         }
     }
-    public static void elementsUpdate () {
 
-    }
-    public static void storageMovementsUpdate () {
-
-    }
-    public static void customersUpdate () {
-
-    }
-// Пока void, потом подумаем что именно они будут возвращать
-    public static void getElementsCount () {
+    public static void updateBalance () {
 
     }
 
-    public static void getElementsPrice () {
+    public static void updateOperations() {
 
     }
 
-    public static List<StorageMovement> getStorageMovements () {
+    public static Balance getBalance () {
         return null;
     }
 
-    public static List<Customer> getCustomers () {
+    public static List<StorageOperation> getOperations (Date startDate, Date endDate, String customer, String type, boolean isPerformed) {
         return null;
     }
 
+    public static void insertOperation (StorageOperation operation){
+
+    }
+
+    public static void inventory (Balance balance) {
+
+    }
 }

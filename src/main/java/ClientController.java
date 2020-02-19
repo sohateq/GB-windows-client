@@ -137,4 +137,35 @@ public abstract class ClientController {
         }
     }
 
+    public static void getBalanceObjectFromServer(){
+        ClientConfig clientConfig = new DefaultClientConfig();
+
+        // Create Client based on Config
+        Client client = Client.create(clientConfig);
+
+        WebResource webResource = client.resource("http://35.237.102.95:8080/api/v1/orders");
+
+        WebResource.Builder builder = webResource.accept(MediaType.APPLICATION_JSON) //
+                .header("content-type", MediaType.APPLICATION_JSON);
+
+        ClientResponse response = builder.get(ClientResponse.class);
+
+        // Status 200 is successful.
+        if (response.getStatus() != 200) {
+            System.out.println("Failed with HTTP Error code: " + response.getStatus());
+            String error= response.getEntity(String.class);
+            System.out.println("Error: "+error);
+            return;
+        }
+
+        Balance balance = (Balance) response.getEntity(Balance.class);
+        String output = response.getEntity(String.class);
+
+        System.out.println("Output from Server .... \n");
+        System.out.println(output);
+
+        System.out.println("------------------");
+        System.out.println(balance.getCrossbarWeight());
+    }
+
 }

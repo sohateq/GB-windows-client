@@ -1,52 +1,33 @@
-public class Construction {
-    private int height;
-    private int length;
-    private double squareMeterCost;
+public class Balance {
+
     private int stairsFrameCount;
+    private int stairsFrameBadCount;
     private double stairsFrameWeight;
     private double stairsFrameCost;
     private int passFrameCount;
+    private int passFrameBadCount;
     private double passFrameWeight;
     private double passFrameCost;
     private int diagonalConnectionCount;
+    private int diagonalConnectionBadCount;
     private double diagonalConnectionWeight;
     private double diagonalConnectionCost;
     private int horizontalConnectionCount;
+    private int horizontalConnectionBadCount;
     private double horizontalConnectionWeight;
     private double horizontalConnectionCost;
     private int crossbarCount;
+    private int crossbarBadCount;
     private double crossbarWeight;
     private double crossbarCost;
     private int deckCount;
+    private int deckBadCount;
     private double deckWeight;
     private double deckCost;
     private int supportsCount;
+    private int supportsBadCount;
     private double supportsWeight;
     private double supportsCost;
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
-    public double getSquareMeterCost() {
-        return squareMeterCost;
-    }
-
-    public void setSquareMeterCost(double squareMeterCost) {
-        this.squareMeterCost = squareMeterCost;
-    }
 
     public int getStairsFrameCount() {
         return stairsFrameCount;
@@ -54,6 +35,14 @@ public class Construction {
 
     public void setStairsFrameCount(int stairsFrameCount) {
         this.stairsFrameCount = stairsFrameCount;
+    }
+
+    public int getStairsFrameBadCount() {
+        return stairsFrameBadCount;
+    }
+
+    public void setStairsFrameBadCount(int stairsFrameBadCount) {
+        this.stairsFrameBadCount = stairsFrameBadCount;
     }
 
     public double getStairsFrameWeight() {
@@ -80,6 +69,14 @@ public class Construction {
         this.passFrameCount = passFrameCount;
     }
 
+    public int getPassFrameBadCount() {
+        return passFrameBadCount;
+    }
+
+    public void setPassFrameBadCount(int passFrameBadCount) {
+        this.passFrameBadCount = passFrameBadCount;
+    }
+
     public double getPassFrameWeight() {
         return passFrameWeight;
     }
@@ -102,6 +99,14 @@ public class Construction {
 
     public void setDiagonalConnectionCount(int diagonalConnectionCount) {
         this.diagonalConnectionCount = diagonalConnectionCount;
+    }
+
+    public int getDiagonalConnectionBadCount() {
+        return diagonalConnectionBadCount;
+    }
+
+    public void setDiagonalConnectionBadCount(int diagonalConnectionBadCount) {
+        this.diagonalConnectionBadCount = diagonalConnectionBadCount;
     }
 
     public double getDiagonalConnectionWeight() {
@@ -128,6 +133,14 @@ public class Construction {
         this.horizontalConnectionCount = horizontalConnectionCount;
     }
 
+    public int getHorizontalConnectionBadCount() {
+        return horizontalConnectionBadCount;
+    }
+
+    public void setHorizontalConnectionBadCount(int horizontalConnectionBadCount) {
+        this.horizontalConnectionBadCount = horizontalConnectionBadCount;
+    }
+
     public double getHorizontalConnectionWeight() {
         return horizontalConnectionWeight;
     }
@@ -150,6 +163,14 @@ public class Construction {
 
     public void setCrossbarCount(int crossbarCount) {
         this.crossbarCount = crossbarCount;
+    }
+
+    public int getCrossbarBadCount() {
+        return crossbarBadCount;
+    }
+
+    public void setCrossbarBadCount(int crossbarBadCount) {
+        this.crossbarBadCount = crossbarBadCount;
     }
 
     public double getCrossbarWeight() {
@@ -176,6 +197,14 @@ public class Construction {
         this.deckCount = deckCount;
     }
 
+    public int getDeckBadCount() {
+        return deckBadCount;
+    }
+
+    public void setDeckBadCount(int deckBadCount) {
+        this.deckBadCount = deckBadCount;
+    }
+
     public double getDeckWeight() {
         return deckWeight;
     }
@@ -198,6 +227,14 @@ public class Construction {
 
     public void setSupportsCount(int supportsCount) {
         this.supportsCount = supportsCount;
+    }
+
+    public int getSupportsBadCount() {
+        return supportsBadCount;
+    }
+
+    public void setSupportsBadCount(int supportsBadCount) {
+        this.supportsBadCount = supportsBadCount;
     }
 
     public double getSupportsWeight() {
