@@ -1,3 +1,5 @@
+import retrofitModel.entity.StorageOperation;
+
 import java.sql.*;
 import java.util.Date;
 import java.util.List;

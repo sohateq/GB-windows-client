@@ -1,171 +1,112 @@
-import ObjectsFromServer.Order;
-import ObjectsFromServer.Product;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.GenericType;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
+import retrofitModel.entity.InfoData;
+import retrofitModel.entity.Product;
+import retrofitModel.repo.TalosRepo;
 
-import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 import java.util.List;
 
 public abstract class ClientController {
-    public static void getProductsStringFromServer(){
-        ClientConfig clientConfig = new DefaultClientConfig();
 
-        // Create Client based on Config
-        Client client = Client.create(clientConfig);
+    public static Balance getBalance () {
+        Balance balance = new Balance();
+        List<InfoData> infoDataList;
+        List<Product> products;
+        try {
+            infoDataList = TalosRepo.getSingleton().getApi().loadInfoData().execute().body();
+            products = TalosRepo.getSingleton().getApi().loadProducts().execute().body();
+            for (int i = 0; i < infoDataList.size(); i++) {
+                String name = infoDataList.get(i).getName();
+                double buyingPrice = infoDataList.get(i).getPriceRin();
+                double weight = infoDataList.get(i).getWeight();
+                if (name.equals("Рама с лестницей (42х1,5)")) {
+                    balance.setStairsFrameBuyingPrice(buyingPrice);
+                    balance.setStairsFrameWeight(weight);
+                }
+                if (name.equals("Рама проходная (42х1,5)")) {
+                    balance.setPassFrameBuyingPrice(buyingPrice);
+                    balance.setPassFrameWeight(weight);
+                }
+                if (name.equals("Связь диагональная, l=3 м.")) {
+                    balance.setDiagonalConnectionBuyingPrice(buyingPrice);
+                    balance.setDiagonalConnectionWeight(weight);
+                }
+                if (name.equals("Связь горизонтальная, l=3 м.")) {
+                    balance.setHorizontalConnectionBuyingPrice(buyingPrice);
+                    balance.setHorizontalConnectionWeight(weight);
+                }
+                if (name.equals("Ригель настила, l=3 м.")) {
+                    balance.setCrossbarBuyingPrice(buyingPrice);
+                    balance.setCrossbarWeight(weight);
+                }
+                if (name.equals("Настил деревянный 1х1")) {
+                    balance.setDeckBuyingPrice(buyingPrice);
+                    balance.setDeckWeight(weight);
+                }
+                if (name.equals("Опора простая (пятки)")) {
+                    balance.setSupportsBuyingPrice(buyingPrice);
+                    balance.setSupportsWeight(weight);
+                }
+            }
+            for (int i = 0; i < products.size(); i++) {
+                String name = products.get(i).getName();
+                String status = products.get(i).getStatus();
+                int count = (int) products.get(i).getCount();
 
-        WebResource webResource = client.resource("http://35.237.102.95:8080/api/v1/products");
-
-        WebResource.Builder builder = webResource.accept(MediaType.APPLICATION_JSON) //
-                .header("content-type", MediaType.APPLICATION_JSON);
-
-        ClientResponse response = builder.get(ClientResponse.class);
-
-        // Status 200 is successful.
-        if (response.getStatus() != 200) {
-            System.out.println("Failed with HTTP Error code: " + response.getStatus());
-            String error= response.getEntity(String.class);
-            System.out.println("Error: "+error);
-            return;
+                if (name.equals("Рама с лестницей (42х1,5)")) {
+                    if (status.equals("брак")) {
+                        balance.setStairsFrameDefectiveCount(balance.getStairsFrameDefectiveCount() + count);
+                    } else {
+                        balance.setStairsFrameCount(balance.getStairsFrameCount() + count);
+                    }
+                }
+                if (name.equals("Рама проходная (42х1,5)")) {
+                    if (status.equals("брак")) {
+                        balance.setPassFrameDefectiveCount(balance.getPassFrameDefectiveCount() + count);
+                    } else {
+                        balance.setPassFrameCount(balance.getPassFrameCount() + count);
+                    }
+                }
+                if (name.equals("Связь диагональная, l=3 м.")) {
+                    if (status.equals("брак")) {
+                        balance.setDiagonalConnectionDefectiveCount(balance.getDiagonalConnectionDefectiveCount() + count);
+                    } else {
+                        balance.setDiagonalConnectionCount(balance.getDiagonalConnectionCount() + count);
+                    }
+                }
+                if (name.equals("Связь горизонтальная, l=3 м.")) {
+                    if (status.equals("брак")) {
+                        balance.setHorizontalConnectionDefectiveCount(balance.getHorizontalConnectionDefectiveCount() + count);
+                    } else {
+                        balance.setHorizontalConnectionCount(balance.getHorizontalConnectionCount() + count);
+                    }
+                }
+                if (name.equals("Ригель настила, l=3 м.")) {
+                    if (status.equals("брак")) {
+                        balance.setCrossbarDefectiveCount(balance.getCrossbarDefectiveCount() + count);
+                    } else {
+                        balance.setCrossbarCount(balance.getCrossbarCount() + count);
+                    }
+                }
+                if (name.equals("Настил деревянный 1х1")) {
+                    if (status.equals("брак")) {
+                        balance.setDeckDefectiveCount(balance.getDeckDefectiveCount() + count);
+                    } else {
+                        balance.setDeckCount(balance.getDeckCount() + count);
+                    }
+                }
+                if (name.equals("Опора простая (пятки)")) {
+                    if (status.equals("брак")) {
+                        balance.setSupportsDefectiveCount(balance.getSupportsDefectiveCount() + count);
+                    } else {
+                        balance.setDeckCount(balance.getDeckCount() + count);
+                    }
+                }
+            }
+            return balance;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
-
-        String output = response.getEntity(String.class);
-
-        System.out.println("Output from Server .... \n");
-        System.out.println(output);
-
-    }
-
-    public static void getProductsListFromServer () {
-        ClientConfig clientConfig = new DefaultClientConfig();
-
-        // Create Client based on Config
-        Client client = Client.create(clientConfig);
-
-        WebResource webResource = client.resource("http://35.237.102.95:8080/api/v1/products");
-
-        WebResource.Builder builder = webResource.accept(MediaType.APPLICATION_JSON) //
-                .header("content-type", MediaType.APPLICATION_JSON);
-
-        ClientResponse response = builder.get(ClientResponse.class);
-
-        // Status 200 is successful.
-        if (response.getStatus() != 200) {
-            System.out.println("Failed with HTTP Error code: " + response.getStatus());
-            String error= response.getEntity(String.class);
-            System.out.println("Error: "+error);
-            return;
-        }
-
-        GenericType<List<Product>> generic = new GenericType<List<Product>>() {
-            // No thing
-        };
-
-        List<Product> list = response.getEntity(generic);
-
-        System.out.println("Output from Server .... \n");
-
-        for (Product product : list) {
-            System.out.println(" --- ");
-            System.out.println(product.toString());
-        }
-    }
-
-    public static void getOrdersStringFromServer(){
-        ClientConfig clientConfig = new DefaultClientConfig();
-
-        // Create Client based on Config
-        Client client = Client.create(clientConfig);
-
-        WebResource webResource = client.resource("http://35.237.102.95:8080/api/v1/orders");
-
-        WebResource.Builder builder = webResource.accept(MediaType.APPLICATION_JSON) //
-                .header("content-type", MediaType.APPLICATION_JSON);
-
-        ClientResponse response = builder.get(ClientResponse.class);
-
-        // Status 200 is successful.
-        if (response.getStatus() != 200) {
-            System.out.println("Failed with HTTP Error code: " + response.getStatus());
-            String error= response.getEntity(String.class);
-            System.out.println("Error: "+error);
-            return;
-        }
-
-        String output = response.getEntity(String.class);
-
-        System.out.println("Output from Server .... \n");
-        System.out.println(output);
-
-    }
-
-    public static void getOrdersListFromServer () {
-        ClientConfig clientConfig = new DefaultClientConfig();
-
-        // Create Client based on Config
-        Client client = Client.create(clientConfig);
-
-        WebResource webResource = client.resource("http://35.237.102.95:8080/api/v1/oeders");
-
-        WebResource.Builder builder = webResource.accept(MediaType.APPLICATION_JSON) //
-                .header("content-type", MediaType.APPLICATION_JSON);
-
-        ClientResponse response = builder.get(ClientResponse.class);
-
-        // Status 200 is successful.
-        if (response.getStatus() != 200) {
-            System.out.println("Failed with HTTP Error code: " + response.getStatus());
-            String error= response.getEntity(String.class);
-            System.out.println("Error: "+error);
-            return;
-        }
-
-        GenericType<List<Order>> generic = new GenericType<List<Order>>() {
-            // No thing
-        };
-
-        List<Order> list = response.getEntity(generic);
-
-        System.out.println("Output from Server .... \n");
-
-        for (Order order : list) {
-            System.out.println(" --- ");
-            System.out.println(order.toString());
-        }
-    }
-
-    public static void getBalanceObjectFromServer(){
-        ClientConfig clientConfig = new DefaultClientConfig();
-
-        // Create Client based on Config
-        Client client = Client.create(clientConfig);
-
-        WebResource webResource = client.resource("http://35.237.102.95:8080/api/v1/orders");
-
-        WebResource.Builder builder = webResource.accept(MediaType.APPLICATION_JSON) //
-                .header("content-type", MediaType.APPLICATION_JSON);
-
-        ClientResponse response = builder.get(ClientResponse.class);
-
-        // Status 200 is successful.
-        if (response.getStatus() != 200) {
-            System.out.println("Failed with HTTP Error code: " + response.getStatus());
-            String error= response.getEntity(String.class);
-            System.out.println("Error: "+error);
-            return;
-        }
-
-        Balance balance = (Balance) response.getEntity(Balance.class);
-        String output = response.getEntity(String.class);
-
-        System.out.println("Output from Server .... \n");
-        System.out.println(output);
-
-        System.out.println("------------------");
-        System.out.println(balance.getCrossbarWeight());
     }
 
 }

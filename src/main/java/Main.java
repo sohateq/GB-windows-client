@@ -7,7 +7,6 @@ public class Main {
 //        new ManagerGUI();
 //        new CustomersListGUI();
 //        new BalanceGUI();
-//        ClientController.getProductsStringFromServer();
-        ClientController.getBalanceObjectFromServer();
+        System.out.println(ClientController.getBalance().toString());
     }
 }

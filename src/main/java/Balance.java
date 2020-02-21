@@ -1,33 +1,33 @@
 public class Balance {
 
     private int stairsFrameCount;
-    private int stairsFrameBadCount;
+    private int stairsFrameDefectiveCount;
     private double stairsFrameWeight;
-    private double stairsFrameCost;
+    private double stairsFrameBuyingPrice;
     private int passFrameCount;
-    private int passFrameBadCount;
+    private int passFrameDefectiveCount;
     private double passFrameWeight;
-    private double passFrameCost;
+    private double passFrameBuyingPrice;
     private int diagonalConnectionCount;
-    private int diagonalConnectionBadCount;
+    private int diagonalConnectionDefectiveCount;
     private double diagonalConnectionWeight;
-    private double diagonalConnectionCost;
+    private double diagonalConnectionBuyingPrice;
     private int horizontalConnectionCount;
-    private int horizontalConnectionBadCount;
+    private int horizontalConnectionDefectiveCount;
     private double horizontalConnectionWeight;
-    private double horizontalConnectionCost;
+    private double horizontalConnectionBuyingPrice;
     private int crossbarCount;
-    private int crossbarBadCount;
+    private int crossbarDefectiveCount;
     private double crossbarWeight;
-    private double crossbarCost;
+    private double crossbarBuyingPrice;
     private int deckCount;
-    private int deckBadCount;
+    private int deckDefectiveCount;
     private double deckWeight;
-    private double deckCost;
+    private double deckBuyingPrice;
     private int supportsCount;
-    private int supportsBadCount;
+    private int supportsDefectiveCount;
     private double supportsWeight;
-    private double supportsCost;
+    private double supportsBuyingPrice;
 
     public int getStairsFrameCount() {
         return stairsFrameCount;
@@ -37,12 +37,12 @@ public class Balance {
         this.stairsFrameCount = stairsFrameCount;
     }
 
-    public int getStairsFrameBadCount() {
-        return stairsFrameBadCount;
+    public int getStairsFrameDefectiveCount() {
+        return stairsFrameDefectiveCount;
     }
 
-    public void setStairsFrameBadCount(int stairsFrameBadCount) {
-        this.stairsFrameBadCount = stairsFrameBadCount;
+    public void setStairsFrameDefectiveCount(int stairsFrameDefectiveCount) {
+        this.stairsFrameDefectiveCount = stairsFrameDefectiveCount;
     }
 
     public double getStairsFrameWeight() {
@@ -53,12 +53,12 @@ public class Balance {
         this.stairsFrameWeight = stairsFrameWeight;
     }
 
-    public double getStairsFrameCost() {
-        return stairsFrameCost;
+    public double getStairsFrameBuyingPrice() {
+        return stairsFrameBuyingPrice;
     }
 
-    public void setStairsFrameCost(double stairsFrameCost) {
-        this.stairsFrameCost = stairsFrameCost;
+    public void setStairsFrameBuyingPrice(double stairsFrameBuyingPrice) {
+        this.stairsFrameBuyingPrice = stairsFrameBuyingPrice;
     }
 
     public int getPassFrameCount() {
@@ -69,12 +69,12 @@ public class Balance {
         this.passFrameCount = passFrameCount;
     }
 
-    public int getPassFrameBadCount() {
-        return passFrameBadCount;
+    public int getPassFrameDefectiveCount() {
+        return passFrameDefectiveCount;
     }
 
-    public void setPassFrameBadCount(int passFrameBadCount) {
-        this.passFrameBadCount = passFrameBadCount;
+    public void setPassFrameDefectiveCount(int passFrameDefectiveCount) {
+        this.passFrameDefectiveCount = passFrameDefectiveCount;
     }
 
     public double getPassFrameWeight() {
@@ -85,12 +85,12 @@ public class Balance {
         this.passFrameWeight = passFrameWeight;
     }
 
-    public double getPassFrameCost() {
-        return passFrameCost;
+    public double getPassFrameBuyingPrice() {
+        return passFrameBuyingPrice;
     }
 
-    public void setPassFrameCost(double passFrameCost) {
-        this.passFrameCost = passFrameCost;
+    public void setPassFrameBuyingPrice(double passFrameBuyingPrice) {
+        this.passFrameBuyingPrice = passFrameBuyingPrice;
     }
 
     public int getDiagonalConnectionCount() {
@@ -101,12 +101,12 @@ public class Balance {
         this.diagonalConnectionCount = diagonalConnectionCount;
     }
 
-    public int getDiagonalConnectionBadCount() {
-        return diagonalConnectionBadCount;
+    public int getDiagonalConnectionDefectiveCount() {
+        return diagonalConnectionDefectiveCount;
     }
 
-    public void setDiagonalConnectionBadCount(int diagonalConnectionBadCount) {
-        this.diagonalConnectionBadCount = diagonalConnectionBadCount;
+    public void setDiagonalConnectionDefectiveCount(int diagonalConnectionDefectiveCount) {
+        this.diagonalConnectionDefectiveCount = diagonalConnectionDefectiveCount;
     }
 
     public double getDiagonalConnectionWeight() {
@@ -117,12 +117,12 @@ public class Balance {
         this.diagonalConnectionWeight = diagonalConnectionWeight;
     }
 
-    public double getDiagonalConnectionCost() {
-        return diagonalConnectionCost;
+    public double getDiagonalConnectionBuyingPrice() {
+        return diagonalConnectionBuyingPrice;
     }
 
-    public void setDiagonalConnectionCost(double diagonalConnectionCost) {
-        this.diagonalConnectionCost = diagonalConnectionCost;
+    public void setDiagonalConnectionBuyingPrice(double diagonalConnectionBuyingPrice) {
+        this.diagonalConnectionBuyingPrice = diagonalConnectionBuyingPrice;
     }
 
     public int getHorizontalConnectionCount() {
@@ -133,12 +133,12 @@ public class Balance {
         this.horizontalConnectionCount = horizontalConnectionCount;
     }
 
-    public int getHorizontalConnectionBadCount() {
-        return horizontalConnectionBadCount;
+    public int getHorizontalConnectionDefectiveCount() {
+        return horizontalConnectionDefectiveCount;
     }
 
-    public void setHorizontalConnectionBadCount(int horizontalConnectionBadCount) {
-        this.horizontalConnectionBadCount = horizontalConnectionBadCount;
+    public void setHorizontalConnectionDefectiveCount(int horizontalConnectionDefectiveCount) {
+        this.horizontalConnectionDefectiveCount = horizontalConnectionDefectiveCount;
     }
 
     public double getHorizontalConnectionWeight() {
@@ -149,12 +149,12 @@ public class Balance {
         this.horizontalConnectionWeight = horizontalConnectionWeight;
     }
 
-    public double getHorizontalConnectionCost() {
-        return horizontalConnectionCost;
+    public double getHorizontalConnectionBuyingPrice() {
+        return horizontalConnectionBuyingPrice;
     }
 
-    public void setHorizontalConnectionCost(double horizontalConnectionCost) {
-        this.horizontalConnectionCost = horizontalConnectionCost;
+    public void setHorizontalConnectionBuyingPrice(double horizontalConnectionBuyingPrice) {
+        this.horizontalConnectionBuyingPrice = horizontalConnectionBuyingPrice;
     }
 
     public int getCrossbarCount() {
@@ -165,12 +165,12 @@ public class Balance {
         this.crossbarCount = crossbarCount;
     }
 
-    public int getCrossbarBadCount() {
-        return crossbarBadCount;
+    public int getCrossbarDefectiveCount() {
+        return crossbarDefectiveCount;
     }
 
-    public void setCrossbarBadCount(int crossbarBadCount) {
-        this.crossbarBadCount = crossbarBadCount;
+    public void setCrossbarDefectiveCount(int crossbarDefectiveCount) {
+        this.crossbarDefectiveCount = crossbarDefectiveCount;
     }
 
     public double getCrossbarWeight() {
@@ -181,12 +181,12 @@ public class Balance {
         this.crossbarWeight = crossbarWeight;
     }
 
-    public double getCrossbarCost() {
-        return crossbarCost;
+    public double getCrossbarBuyingPrice() {
+        return crossbarBuyingPrice;
     }
 
-    public void setCrossbarCost(double crossbarCost) {
-        this.crossbarCost = crossbarCost;
+    public void setCrossbarBuyingPrice(double crossbarBuyingPrice) {
+        this.crossbarBuyingPrice = crossbarBuyingPrice;
     }
 
     public int getDeckCount() {
@@ -197,12 +197,12 @@ public class Balance {
         this.deckCount = deckCount;
     }
 
-    public int getDeckBadCount() {
-        return deckBadCount;
+    public int getDeckDefectiveCount() {
+        return deckDefectiveCount;
     }
 
-    public void setDeckBadCount(int deckBadCount) {
-        this.deckBadCount = deckBadCount;
+    public void setDeckDefectiveCount(int deckDefectiveCount) {
+        this.deckDefectiveCount = deckDefectiveCount;
     }
 
     public double getDeckWeight() {
@@ -213,12 +213,12 @@ public class Balance {
         this.deckWeight = deckWeight;
     }
 
-    public double getDeckCost() {
-        return deckCost;
+    public double getDeckBuyingPrice() {
+        return deckBuyingPrice;
     }
 
-    public void setDeckCost(double deckCost) {
-        this.deckCost = deckCost;
+    public void setDeckBuyingPrice(double deckBuyingPrice) {
+        this.deckBuyingPrice = deckBuyingPrice;
     }
 
     public int getSupportsCount() {
@@ -229,12 +229,12 @@ public class Balance {
         this.supportsCount = supportsCount;
     }
 
-    public int getSupportsBadCount() {
-        return supportsBadCount;
+    public int getSupportsDefectiveCount() {
+        return supportsDefectiveCount;
     }
 
-    public void setSupportsBadCount(int supportsBadCount) {
-        this.supportsBadCount = supportsBadCount;
+    public void setSupportsDefectiveCount(int supportsDefectiveCount) {
+        this.supportsDefectiveCount = supportsDefectiveCount;
     }
 
     public double getSupportsWeight() {
@@ -245,12 +245,46 @@ public class Balance {
         this.supportsWeight = supportsWeight;
     }
 
-    public double getSupportsCost() {
-        return supportsCost;
+    public double getSupportsBuyingPrice() {
+        return supportsBuyingPrice;
     }
 
-    public void setSupportsCost(double supportsCost) {
-        this.supportsCost = supportsCost;
+    public void setSupportsBuyingPrice(double supportsBuyingPrice) {
+        this.supportsBuyingPrice = supportsBuyingPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "Balance{" +
+                "\nРама с лесницей=" + stairsFrameCount +
+                "\nРама с лестницей брак=" + stairsFrameDefectiveCount +
+                "\nРама с лестницей вес=" + stairsFrameWeight +
+                "\nРама с лестницей закупочная цена=" + stairsFrameBuyingPrice +
+                "\nРама проходная =" + passFrameCount +
+                "\nРама проходная брак=" + passFrameDefectiveCount +
+                "\nРама проходная вес=" + passFrameWeight +
+                "\nРама проходная закупочная цена=" + passFrameBuyingPrice +
+                "\nСвязь диагональная=" + diagonalConnectionCount +
+                "\nСвязь диагональная брак=" + diagonalConnectionDefectiveCount +
+                "\nСвязь диагональная вес=" + diagonalConnectionWeight +
+                "\nСвязь диагональная закупочная цена=" + diagonalConnectionBuyingPrice +
+                "\nСвязь горизонтальная=" + horizontalConnectionCount +
+                "\nСвязь горизонтальная брак=" + horizontalConnectionDefectiveCount +
+                "\nСвязь горизонтальная вес=" + horizontalConnectionWeight +
+                "\nСвязб горизонтальная закупочная цена=" + horizontalConnectionBuyingPrice +
+                "\nРигель настила=" + crossbarCount +
+                "\nРигель настила брак=" + crossbarDefectiveCount +
+                "\nРигель настила вес=" + crossbarWeight +
+                "\nРигель настила закупочная цена=" + crossbarBuyingPrice +
+                "\nНастил деревянный=" + deckCount +
+                "\nНастил деревянный брак=" + deckDefectiveCount +
+                "\nнастил деревянный вес=" + deckWeight +
+                "\nНастил деревянный закупочная цена=" + deckBuyingPrice +
+                "\nОпоры=" + supportsCount +
+                "\nОпоры брак=" + supportsDefectiveCount +
+                "\nОпоры вес=" + supportsWeight +
+                "\nОпоры закупочная цена=" + supportsBuyingPrice + "\n" +
+                '}';
     }
 }
 
