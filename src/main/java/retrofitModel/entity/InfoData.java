@@ -5,7 +5,7 @@ import com.google.gson.annotations.Expose;
 public class InfoData {
 
     @Expose
-    private Integer infoId;
+    private Integer infoId; //id Элемента
     @Expose
     private String name; // Наисменование элеента
     @Expose

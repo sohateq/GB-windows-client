@@ -7,8 +7,8 @@ public class Main {
 //        new ManagerGUI();
 //        new CustomersListGUI();
 //        new BalanceGUI();
-//        System.out.println(ClientController.getBalance().toString());
+//        System.out.println(ClientController.getInstance().getBalance().toString());
 //        new StorageGUI();
-        new ShipmentListGUI();
+//        new ShipmentListGUI();
     }
 }

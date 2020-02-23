@@ -9,7 +9,7 @@ public class TalosRepo{
     private static TalosRepo singleton = null;
     private IDataSource api;
 
-    public TalosRepo() {
+    private TalosRepo() {
         this.api = createAdapter();
     }
 
@@ -22,7 +22,7 @@ public class TalosRepo{
         return adapter.create(IDataSource.class);
     }
 
-    public static TalosRepo getSingleton() {
+    public static synchronized TalosRepo getSingleton() {
         if(singleton == null) {
             singleton = new TalosRepo();
         }

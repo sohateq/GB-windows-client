@@ -1,13 +1,26 @@
 import retrofitModel.entity.InfoData;
 import retrofitModel.entity.Product;
+import retrofitModel.entity.StorageOperation;
 import retrofitModel.repo.TalosRepo;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ClientController {
+public class ClientController {
+    private static ClientController instance;
+    private TalosRepo talosRepo;
+    private ClientController() {
+        talosRepo = TalosRepo.getSingleton();
+    }
+    public static synchronized ClientController getInstance() {
+        if (instance == null) {
+            instance = new ClientController();
+        }
+        return instance;
+    }
 
-    public static Balance getBalance () {
+    public Balance getBalance () {
         Balance balance = new Balance();
         List<InfoData> infoDataList;
         List<Product> products;
@@ -109,4 +122,50 @@ public abstract class ClientController {
         }
     }
 
+    public List<StorageOperation> getOperationsList () {
+        try {
+            return talosRepo.getApi().loadOperations().execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void changeBalance (Balance balance) {
+        Product [] products = new Product[14];
+        products [0] = new Product(1, "Рама с лестницей (42х1,5)", "Ринстрой", "бу",balance.getStairsFrameCount());
+        products [1] = new Product(2, "Рама с лестницей (42х1,5)", "Ринстрой", "брак",balance.getStairsFrameDefectiveCount());
+        products [2] = new Product(3, "Рама проходная (42х1,5)", "Ринстрой", "бу",balance.getPassFrameCount());
+        products [3] = new Product(4, "Рама проходная (42х1,5)", "Ринстрой", "брак",balance.getPassFrameDefectiveCount());
+        products [4] = new Product(5, "Связь диагональная, l=3 м.", "Ринстрой", "бу",balance.getDiagonalConnectionCount());
+        products [5] = new Product(6, "Связь диагональная, l=3 м.", "Ринстрой", "брак",balance.getDiagonalConnectionDefectiveCount());
+        products [6] = new Product(7, "Связь горизонтальная, l=3 м.", "Ринстрой", "бу",balance.getHorizontalConnectionCount());
+        products [7] = new Product(8, "Связь горизонтальная, l=3 м.", "Ринстрой", "брак",balance.getHorizontalConnectionDefectiveCount());
+        products [8] = new Product(9, "Ригель настила, l=3 м.", "Ринстрой", "бу",balance.getCrossbarCount());
+        products [9] = new Product(10, "Ригель настила, l=3 м.", "Ринстрой", "брак",balance.getCrossbarDefectiveCount());
+        products [10] = new Product(11, "Настил деревянный 1х1", "Ринстрой", "бу",balance.getDeckCount());
+        products [11] = new Product(12, "Настил деревянный 1х1", "Ринстрой", "брак",balance.getDeckDefectiveCount());
+        products [12] = new Product(13, "Опора простая (пятки)", "Ринстрой", "бу",balance.getSupportsCount());
+        products [13] = new Product(14, "Опора простая (пятки)", "Ринстрой", "брак",balance.getSupportsDefectiveCount());
+        for (int i = 0; i < products.length; i++) {
+            talosRepo.getApi().editProduct(i+1, products[i]);
+        }
+
+        InfoData [] infoDataArr = new InfoData[7];
+        infoDataArr [0] = new InfoData(1, "Опора простая (пятки)", balance.getSupportsWeight(), (balance.getSupportsBuyingPrice()/100)*115, balance.getSupportsBuyingPrice(),0.0);
+        infoDataArr [1] = new InfoData(2, "Рама проходная (42х1,5)", balance.getPassFrameWeight(), (balance.getPassFrameBuyingPrice()/100)*115, balance.getPassFrameBuyingPrice(), 0.0);
+        infoDataArr [2] = new InfoData(3, "Связь диагональная, l=3 м.", balance.getDiagonalConnectionWeight(), (balance.getDiagonalConnectionBuyingPrice()/100)*115, balance.getDiagonalConnectionBuyingPrice(), 0.0);
+        infoDataArr [3] = new InfoData(4, "Связь горизонтальная, l=3 м.", balance.getHorizontalConnectionWeight(), (balance.getHorizontalConnectionBuyingPrice()/100)*115, balance.getHorizontalConnectionBuyingPrice(), 0.0);
+        infoDataArr [4] = new InfoData(5, "Ригель настила, l=3 м.", balance.getCrossbarWeight(), (balance.getCrossbarBuyingPrice()/100)*115, balance.getCrossbarBuyingPrice(), 0.0);
+        infoDataArr [5] = new InfoData(6, "Настил деревянный 1х1", balance.getDeckWeight(), (balance.getDeckBuyingPrice()/100)*115, balance.getDeckBuyingPrice(), 0.0);
+        infoDataArr [6] = new InfoData(7, "Рама с лестницей (42х1,5)", balance.getStairsFrameWeight(), (balance.getStairsFrameBuyingPrice()/100)*115, balance.getStairsFrameBuyingPrice(), 0.0);
+        for (int i = 0; i < infoDataArr.length; i++) {
+            talosRepo.getApi().editInfoData(i+1, infoDataArr[i]);
+        }
+
+    }
+
+    public void createOperation (StorageOperation operation) {
+        talosRepo.getApi().createOperation(operation);
+    }
 }
