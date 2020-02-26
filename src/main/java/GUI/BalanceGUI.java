@@ -46,11 +46,19 @@ public class BalanceGUI extends JFrame {
     private JLabel defectiveCountLabel;
     private JLabel weightLabel;
     private JLabel buyingPriceLabel;
+    private MainWindow mainWindow;
 
-    public BalanceGUI() throws HeadlessException {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setBounds(400, 100, 700, 800);
+    public BalanceGUI(MainWindow mainWindow) throws HeadlessException {
+        this.mainWindow = mainWindow;
+        setBackButtonAction();
         setContentPane(RootPanel);
-        setVisible(true);
+
+    }
+
+    private void setBackButtonAction() {
+        backButton.addActionListener(e -> {
+            mainWindow.setContentPane(new ManagerGUI(mainWindow).getRootPanel());
+            mainWindow.validate();
+        });
     }
 }

@@ -10,5 +10,6 @@ public class Main {
 //        System.out.println(ClientController.getInstance().getBalance().toString());
 //        new StorageGUI();
 //        new ShipmentListGUI();
+        new MainWindow();
     }
 }
