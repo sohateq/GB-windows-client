@@ -1,3 +1,4 @@
+import org.jetbrains.annotations.NotNull;
 import retrofitModel.entity.InfoData;
 import retrofitModel.entity.Product;
 import retrofitModel.entity.StorageOperation;
@@ -131,7 +132,7 @@ public class ClientController {
         }
     }
 
-    public void changeBalance (Balance balance) {
+    public void changeBalance (@NotNull Balance balance) {
         Product [] products = new Product[14];
         products [0] = new Product(1, "Рама с лестницей (42х1,5)", "Ринстрой", "бу",balance.getStairsFrameCount());
         products [1] = new Product(2, "Рама с лестницей (42х1,5)", "Ринстрой", "брак",balance.getStairsFrameDefectiveCount());
