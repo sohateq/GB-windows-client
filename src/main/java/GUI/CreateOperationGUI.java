@@ -1,14 +1,13 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 
-public class CreateOperationGUI {
+public class CreateOperationGUI extends JFrame {
     private JPanel RootPanel;
     private JButton backButton;
-    private JLabel fromLabel;
-    private JComboBox fromComboBox;
-    private JLabel toLabel;
-    private JComboBox toComboBox;
+    private JLabel customerLabel;
+    private JComboBox customerComboBox;
     private JLabel dateLabel;
     private JComboBox dayComboBox;
     private JComboBox monthComboBox;
@@ -31,4 +30,31 @@ public class CreateOperationGUI {
     private JTextField deckCountTextField;
     private JTextField supportCountTextField;
     private JButton createButton;
+    private JTextField stairsFrameDefectiveCountTextField;
+    private JTextField passFrameDefectiveCountTextField;
+    private JTextField diagonalConnectionDefecviveCountTextField;
+    private JTextField horizontalConnectionDefectiveCountTextField;
+    private JTextField crossbarDefectiveCountTextField;
+    private JTextField deckDefectiveCountTextField;
+    private JTextField supportDefectiveCountTextField;
+    private JLabel countLabel;
+    private JLabel defectiveCountLabel;
+    private MainWindow mainWindow;
+    private JFrame fromWindow;
+
+    public CreateOperationGUI(MainWindow mainWindow, JFrame fromWindow) throws HeadlessException {
+        this.mainWindow = mainWindow;
+        this.fromWindow = fromWindow;
+        setContentPane(RootPanel);
+        setBackButtonAction();
+    }
+
+    private void setBackButtonAction() {
+        backButton.addActionListener(e -> {
+            mainWindow.setContentPane(fromWindow.getContentPane());
+            mainWindow.validate();
+        });
+    }
+
+
 }

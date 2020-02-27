@@ -62,11 +62,20 @@ public class OperationsListGUI extends JFrame {
     private JTextField crossbarBadCountTextField;
     private JTextField deckBadCountTextField;
     private JTextField supportBadCountTextField;
+    private MainWindow mainWindow;
+    private JFrame fromWindow;
 
-    public OperationsListGUI() {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setBounds(100, 100, 1700, 800);
+    public OperationsListGUI(MainWindow mainWindow, JFrame fromWindow) {
+        this.mainWindow = mainWindow;
+        this.fromWindow = fromWindow;
         setContentPane(RootPanel);
-        setVisible(true);
+        setBackButtonAction();
+    }
+
+    private void setBackButtonAction() {
+        backButton.addActionListener(e -> {
+            mainWindow.setContentPane(fromWindow.getContentPane());
+            mainWindow.validate();
+        });
     }
 }

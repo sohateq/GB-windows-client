@@ -18,7 +18,7 @@ public class CustomersListGUI extends JFrame {
     private JScrollPane operationsScrollPane;
     private JLabel operationsContentLabel;
     private JLabel customerBalanceLabel;
-    private JPanel rootPane;
+    private JPanel RootPanel;
     private JScrollPane customersListScrollPane;
     private JPanel InfoPane;
     private JLabel stairsFrameCountLabel;
@@ -64,11 +64,20 @@ public class CustomersListGUI extends JFrame {
     private JTextField crossbarBalanceTextField;
     private JTextField deckBalanceTextField;
     private JTextField supportBalanceTextField;
+    private MainWindow mainWindow;
+    private JFrame fromWindow;
 
-    public CustomersListGUI() {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setBounds(400, 100, 700, 800);
-        setContentPane(rootPane);
-        setVisible(true);
+    public CustomersListGUI(MainWindow mainWindow, JFrame fromWindow) {
+        this.mainWindow = mainWindow;
+        this.fromWindow = fromWindow;
+        setContentPane(RootPanel);
+        setBackButtonAction();
+    }
+
+    private void setBackButtonAction() {
+        backButton.addActionListener(e -> {
+            mainWindow.setContentPane(fromWindow.getContentPane());
+            mainWindow.validate();
+        });
     }
 }

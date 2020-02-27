@@ -75,11 +75,20 @@ public class CalculateGUI extends JFrame {
     private JTextField crossbarTotalCostTextField;
     private JTextField deckTotalCostTextField;
     private JTextField supportTotalCostTextField;
+    private MainWindow mainWindow;
+    private JFrame fromWindow;
 
-    public CalculateGUI() {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setBounds(200, 100, 1700, 800);
+    public CalculateGUI(MainWindow mainWindow, JFrame fromWindow) {
+        this.mainWindow = mainWindow;
+        this.fromWindow = fromWindow;
         setContentPane(RootPanel);
-        setVisible(true);
+        setBackButtonAction();
+    }
+
+    private void setBackButtonAction() {
+        backButton.addActionListener(e -> {
+            mainWindow.setContentPane(fromWindow.getContentPane());
+            mainWindow.validate();
+        });
     }
 }

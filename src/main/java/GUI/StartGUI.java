@@ -10,19 +10,21 @@ public class StartGUI extends JFrame {
 
     public StartGUI(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
-//        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//        setBounds(400, 100, 700, 800);
-//        setContentPane(RootPanel);
-//        setVisible(false);
+        setContentPane(RootPanel);
         setManagerButtonAction();
+        setStorageButtonAction();
     }
 
-    public JPanel getRootPanel() {
-        return RootPanel;
-    }
     private void setManagerButtonAction () {
         managerButton.addActionListener(e -> {
-            mainWindow.setContentPane(new ManagerGUI(mainWindow).getRootPanel());
+            mainWindow.setContentPane(new ManagerGUI(mainWindow).getContentPane());
+            mainWindow.validate();
+        });
+    }
+
+    private void setStorageButtonAction() {
+        storageButton.addActionListener(e -> {
+            mainWindow.setContentPane(new StorageGUI(mainWindow).getContentPane());
             mainWindow.validate();
         });
     }

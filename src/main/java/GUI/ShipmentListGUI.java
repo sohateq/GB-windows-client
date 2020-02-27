@@ -6,7 +6,7 @@ import java.awt.*;
 public class ShipmentListGUI extends JFrame {
     private JPanel RootPanel;
     private JButton backButton;
-    private JScrollPane sipmentListScrollPane;
+    private JScrollPane shipmentListScrollPane;
     private JList shipmentList;
     private JLabel infoLabel;
     private JPanel InfoPane;
@@ -29,11 +29,20 @@ public class ShipmentListGUI extends JFrame {
     private JLabel dateLabel;
     private JTextField dateTextField;
     private JButton ShipButton;
+    private MainWindow mainWindow;
+    private JFrame fromWindow;
 
-    public ShipmentListGUI() throws HeadlessException {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setBounds(400, 100, 700, 800);
+    public ShipmentListGUI(MainWindow mainWindow, JFrame fromWindow) throws HeadlessException {
+        this.mainWindow = mainWindow;
+        this.fromWindow = fromWindow;
         setContentPane(RootPanel);
-        setVisible(true);
+        setBackButtonAction();
+    }
+
+    private void setBackButtonAction() {
+        backButton.addActionListener(e -> {
+            mainWindow.setContentPane(fromWindow.getContentPane());
+            mainWindow.validate();
+        });
     }
 }

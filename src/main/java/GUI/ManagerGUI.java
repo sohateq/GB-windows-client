@@ -6,26 +6,47 @@ public class ManagerGUI extends JFrame {
     private JPanel RootPanel;
     private JButton balanceButton;
     private JButton calcButton;
-    private JButton operationHistoryButton;
+    private JButton operationsListButton;
     private JButton customersButton;
     private MainWindow mainWindow;
 
     public ManagerGUI(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
+        setContentPane(RootPanel);
         setBalanceButtonAction();
-//        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//        setBounds(400, 100, 700, 800);
-//        setContentPane(RootPanel);
-//        setVisible(true);
+        setCalcButtonAction();
+        setOperationsListButtonAction();
+        setCustomersButtonAction();
     }
 
     protected JPanel getRootPanel() {
         return RootPanel;
     }
 
-    protected void setBalanceButtonAction () {
+    private void setBalanceButtonAction () {
         balanceButton.addActionListener(e -> {
-            this.mainWindow.setContentPane(new BalanceGUI(mainWindow).getContentPane());
+            this.mainWindow.setContentPane(new BalanceGUI(mainWindow, this).getContentPane());
+            this.mainWindow.validate();
+        });
+    }
+
+    private void setCalcButtonAction () {
+        calcButton.addActionListener(e -> {
+            this.mainWindow.setContentPane(new CalculateGUI(mainWindow, this).getContentPane());
+            this.mainWindow.validate();
+        });
+    }
+
+    private void setOperationsListButtonAction() {
+        operationsListButton.addActionListener(e -> {
+            this.mainWindow.setContentPane(new OperationsListGUI(mainWindow, this).getContentPane());
+            this.mainWindow.validate();
+        });
+    }
+
+    private void setCustomersButtonAction () {
+        customersButton.addActionListener(e -> {
+            this.mainWindow.setContentPane(new CustomersListGUI(mainWindow, this).getContentPane());
             this.mainWindow.validate();
         });
     }

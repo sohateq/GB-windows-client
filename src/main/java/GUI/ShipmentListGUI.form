@@ -16,7 +16,7 @@
           <text value="Назад"/>
         </properties>
       </component>
-      <scrollpane id="43a89" binding="sipmentListScrollPane">
+      <scrollpane id="43a89" binding="shipmentListScrollPane">
         <constraints>
           <grid row="1" column="0" row-span="2" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <minimum-size width="250" height="-1"/>
