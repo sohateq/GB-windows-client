@@ -28,14 +28,19 @@ public abstract class DataBaseController {
 
     public static void updateBalance () {
 //        Обновляет локальную базу данных с балансом
+        try {
+            statement.execute("CREATE TABLE IF NOT EXISTS Blance (id INTEGER PRIMARY KEY NOT NULL, name TEXT  UNIQUE NOT NULL, count INTEGER, defectiveCount INTEGER, weight REAL, buyingPrice REAL);");
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void updateOperations() {
 //        Обновляет локальную базу данных операций
     }
 
-    public static Balance getBalance () {
+    public static ElementScaffold[] getBalance () {
 //        Возвращщает объект баланса из локальной базы данных
         return null;
     }
@@ -50,7 +55,7 @@ public abstract class DataBaseController {
 //        Добавляет в локальную и серверную базу данных операций новую операцию (лучше сделать в отдельном потоке)
     }
 
-    public static void inventory (Balance balance) {
+    public static void inventory (ElementScaffold[] balance) {
 //        Меняет локальную и серверную базу данных баланса (лучше сделать в отдельном потоке)
 
     }
