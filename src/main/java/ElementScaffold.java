@@ -67,4 +67,15 @@ public class ElementScaffold {
     public void defectiveCountAppend ( int append) {
         this.defectiveCount += append;
     }
+
+    @Override
+    public String toString() {
+        return "ElementScaffold{" +
+                "name='" + name + '\'' +
+                ", count=" + count +
+                ", defectiveCount=" + defectiveCount +
+                ", weight=" + weight +
+                ", buyingPrice=" + buyingPrice +
+                '}';
+    }
 }
