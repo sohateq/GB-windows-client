@@ -5,6 +5,7 @@ public class Main {
 //        new MainWindow();
         DataBaseController.connect();
         DataBaseController.updateBalance();
+        DataBaseController.updateOperations();
         DataBaseController.disconnect();
     }
 }

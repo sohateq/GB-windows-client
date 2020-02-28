@@ -120,4 +120,80 @@ public class StorageOperation {
                 ", performed=" + performed +
                 '}';
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Integer getStairsFrameCount() {
+        return stairsFrameCount;
+    }
+
+    public Integer getPassFrameCount() {
+        return passFrameCount;
+    }
+
+    public Integer getDiagonalConnectionCount() {
+        return diagonalConnectionCount;
+    }
+
+    public Integer getHorizontalConnectionCount() {
+        return horizontalConnectionCount;
+    }
+
+    public Integer getCrossbarCount() {
+        return crossbarCount;
+    }
+
+    public Integer getDeckCount() {
+        return deckCount;
+    }
+
+    public Integer getSupportsCount() {
+        return supportsCount;
+    }
+
+    public Integer getStairsFrameBadCount() {
+        return stairsFrameBadCount;
+    }
+
+    public Integer getPassFrameBadCount() {
+        return passFrameBadCount;
+    }
+
+    public Integer getDiagonalConnectionBadCount() {
+        return diagonalConnectionBadCount;
+    }
+
+    public Integer getHorizontalConnectionBadCount() {
+        return horizontalConnectionBadCount;
+    }
+
+    public Integer getCrossbarBadCount() {
+        return crossbarBadCount;
+    }
+
+    public Integer getDeckBadCount() {
+        return deckBadCount;
+    }
+
+    public Integer getSupportsBadCount() {
+        return supportsBadCount;
+    }
+
+    public Boolean getPerformed() {
+        return performed;
+    }
 }

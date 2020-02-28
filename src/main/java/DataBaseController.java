@@ -1,3 +1,4 @@
+import GUI.OperationsListGUI;
 import retrofitModel.entity.StorageOperation;
 
 import java.sql.*;
@@ -53,6 +54,96 @@ public abstract class DataBaseController {
 
     public static void updateOperations() {
 //        Обновляет локальную базу данных операций
+        try {
+            statement.execute("CREATE TABLE IF NOT EXISTS Operations (id INTEGER PRIMARY KEY NOT NULL, date TEXT NOT NULL, customerName TEXT NOT NULL, type TEXT NOT NULL, " +
+                    "stairsFrameCount INTEGER, " +
+                    "passFrameCount INTEGER, " +
+                    "diagonalConnectionCount INTEGER, " +
+                    "horizontalConnectionCount INTEGER, " +
+                    "crossbarCount INTEGER, " +
+                    "deckCount INTEGER, " +
+                    "supportsCount INTEGER, " +
+                    "stairsFrameBadCount INTEGER, " +
+                    "passFrameBadCount INTEGER, " +
+                    "diagonalConnectionBadCount INTEGER, " +
+                    "horizontalConnectionBadCount INTEGER, " +
+                    "crossbarBadCount INTEGER, " +
+                    "deckBadCount INTEGER, " +
+                    "supportsBadCount INTEGER, " +
+                    "performed INTEGER);");
+            List<StorageOperation> operations = ClientController.getInstance().getOperationsList();
+            for (int i = 0; i < operations.size(); i++) {
+                int id = operations.get(i).getId();
+                String date = operations.get(i).getDate();
+                String customerName = operations.get(i).getCustomerName();
+                String type = operations.get(i).getType();
+                int stairsFrameCount = operations.get(i).getStairsFrameCount();
+                int passFrameCount = operations.get(i).getPassFrameCount();
+                int diagonalConnectionCount = operations.get(i).getDiagonalConnectionCount();
+                int horizontalConnectionCount = operations.get(i).getHorizontalConnectionCount();
+                int crossbarCount = operations.get(i).getCrossbarCount();
+                int deckCount = operations.get(i).getDeckCount();
+                int supportsCount = operations.get(i).getSupportsCount();
+                int stairsFrameBadCount = operations.get(i).getStairsFrameBadCount();
+                int passFrameBadCount = operations.get(i).getPassFrameBadCount();
+                int diagonalConnectionBadCount = operations.get(i).getDiagonalConnectionBadCount();
+                int horizontalConnectionBadCount = operations.get(i).getHorizontalConnectionBadCount();
+                int crossbarBadCount = operations.get(i).getCrossbarBadCount();
+                int deckBadCount = operations.get(i).getDeckBadCount();
+                int supportsBadCount = operations.get(i).getSupportsBadCount();
+                int performed = 0;
+                if (operations.get(i).getPerformed()) {
+                    performed = 1;
+                }
+                try {
+                    String query = String.format("INSERT INTO Operations(id, date, customerName, type, " +
+                            "stairsFrameCount, " +
+                            "passFrameCount, " +
+                            "diagonalConnectionCount, " +
+                            "horizontalConnectionCount, " +
+                            "crossbarCount, " +
+                            "deckCount, " +
+                            "supportsCount, " +
+                            "stairsFrameBadCount, " +
+                            "passFrameBadCount, " +
+                            "diagonalConnectionBadCount, " +
+                            "horizontalConnectionBadCount, " +
+                            "crossbarBadCount, " +
+                            "deckBadCount, " +
+                            "supportsBadCount, " +
+                            "performed) VALUES('%d', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d')",
+                            id, date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount, deckCount, supportsCount,
+                            stairsFrameBadCount, passFrameBadCount, diagonalConnectionBadCount, horizontalConnectionBadCount, crossbarBadCount, deckBadCount, supportsBadCount, performed);
+                    statement.execute(query);
+                } catch (SQLException e) {
+                    String query = String.format("UPDATE Operations SET " +
+                                    "date = '%s', " +
+                                    "customerName = '%s', " +
+                                    "type = '%s', " +
+                                    "stairsFrameCount = '%d', " +
+                                    "passFrameCount = '%d', " +
+                                    "diagonalConnectionCount = '%d', " +
+                                    "horizontalConnectionCount = '%d', " +
+                                    "crossbarCount = '%d', " +
+                                    "deckCount = '%d', " +
+                                    "supportsCount = '%d', " +
+                                    "stairsFrameBadCount = '%d', " +
+                                    "passFrameBadCount = '%d', " +
+                                    "diagonalConnectionBadCount = '%d', " +
+                                    "horizontalConnectionBadCount = '%d', " +
+                                    "crossbarBadCount = '%d', " +
+                                    "deckBadCount = '%d', " +
+                                    "supportsBadCount = '%d', " +
+                                    "performed = '%d' " +
+                                    "WHERE id = '%d';",
+                            date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount, deckCount, supportsCount,
+                            stairsFrameBadCount, passFrameBadCount, diagonalConnectionBadCount, horizontalConnectionBadCount, crossbarBadCount, deckBadCount, supportsBadCount, performed, id);
+                    statement.execute(query);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static ElementScaffold[] getBalance () {
