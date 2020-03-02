@@ -4,8 +4,6 @@ import retrofitModel.entity.StorageOperation;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 public abstract class DataBaseController {
@@ -314,10 +312,18 @@ public abstract class DataBaseController {
 // Оба следующих метода не должны выполняться одновременно
     public static void insertOperation (StorageOperation operation) {
 //        Добавляет в локальную и серверную базу данных операций новую операцию (лучше сделать в отдельном потоке)
+        new Thread(()->{
+            ClientController.getInstance().createOperation(operation);
+            updateOperations();
+        }).start();
     }
 
     public static void inventory (ElementScaffold[] balance) {
 //        Меняет локальную и серверную базу данных баланса (лучше сделать в отдельном потоке)
+        new Thread(()-> {
+            ClientController.getInstance().changeBalance(balance);
+            updateBalance();
+        }).start();
 
     }
 }
