@@ -1,7 +1,10 @@
 import GUI.OperationsListGUI;
+import com.google.gson.annotations.Expose;
 import retrofitModel.entity.StorageOperation;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -148,13 +151,165 @@ public abstract class DataBaseController {
 
     public static ElementScaffold[] getBalance () {
 //        Возвращщает объект баланса из локальной базы данных
-        return null;
+        List<ElementScaffold> elementScaffolds = new ArrayList<>();
+        ElementScaffold [] balance = new ElementScaffold[7];
+        try {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Balance;");
+            while (resultSet.next()) {
+                String elementName = resultSet.getString("name");
+                int count = resultSet.getInt("count");
+                int defectiveCount = resultSet.getInt("defectiveCount");
+                double weight = resultSet.getDouble("weight");
+                double buyingPrice = resultSet.getDouble("buyingPrice");
+                elementScaffolds.add(new ElementScaffold(elementName, count, defectiveCount, weight, buyingPrice));
+            }
+            elementScaffolds.toArray(balance);
+            return balance;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public static List<StorageOperation> getOperations (Date startDate, Date endDate, String customer, String type, boolean isPerformed) {
-//        Возвращает лист операций с учетом фильтров, должен работать даже если один, несколько или все фильтры не заданы
-        return null;
+    public static List<StorageOperation> getOperations () {
+        List<StorageOperation> operations = new ArrayList<>();
+        try {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Operations ORDER BY date DESC;");
+            while (resultSet.next()) {
+                String date = resultSet.getString("date");
+                String customerName = resultSet.getString("customerName");
+                String type = resultSet.getString("type");
+                int stairsFrameCount = resultSet.getInt("stairsFrameCount");
+                int passFrameCount = resultSet.getInt("passFrameCount");
+                int diagonalConnectionCount = resultSet.getInt("diagonalConnectionCount");
+                int horizontalConnectionCount = resultSet.getInt("horizontalConnectionCount");
+                int crossbarCount = resultSet.getInt("crossbarCount");
+                int deckCount = resultSet.getInt("deckCount");
+                int supportsCount = resultSet.getInt("supportsCount");
+                int stairsFrameBadCount = resultSet.getInt("stairsFrameBadCount");
+                int passFrameBadCount = resultSet.getInt("passFrameBadCount");
+                int diagonalConnectionBadCount = resultSet.getInt("diagonalConnectionBadCount");
+                int horizontalConnectionBadCount = resultSet.getInt("horizontalConnectionBadCount");
+                int crossbarBadCount = resultSet.getInt("crossbarBadCount");
+                int deckBadCount = resultSet.getInt("deckBadCount");
+                int supportsBadCount = resultSet.getInt("supportsBadCount");
+                Boolean performed = false;
+                if (resultSet.getInt("performed") == 1) {
+                    performed = true;
+                }
+                operations.add(new StorageOperation(date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount, deckCount, supportsCount,
+                        stairsFrameBadCount, passFrameBadCount, diagonalConnectionBadCount, horizontalConnectionBadCount, crossbarBadCount, deckBadCount, supportsBadCount, performed));
+            }
+            return operations;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
+    public static List<StorageOperation> getOperations (String startDate, String endDate, String customer, String typeF, boolean isPerformed) {
+//        Возвращает лист операций с учетом фильтров, должен работать даже если один, несколько или все фильтры не заданы
+        if (startDate == null || startDate.isEmpty()) {
+            startDate = "MIN";
+        }
+        if (endDate == null || endDate.isEmpty()){
+            endDate = "MAX";
+        }
+        if (customer != null && !customer.isEmpty()) {
+            customer = " AND customer = '" + customer + "'";
+        }
+        if (typeF != null && !typeF.isEmpty()) {
+            typeF = " AND type = '" + typeF + "'";
+        }
+        String performed = " AND performed = '1'";
+        if (!isPerformed) {
+            performed = " AND performed = '0'";
+        }
+        String filter = "WHERE (date BETWEEN " + startDate + " AND " + endDate + ")" + customer + typeF + performed;
+        List<StorageOperation> operations = new ArrayList<>();
+        try {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Operations" + filter + " ORDER BY date DESC;");
+            while (resultSet.next()) {
+                String date = resultSet.getString("date");
+                String customerName = resultSet.getString("customerName");
+                String type = resultSet.getString("type");
+                int stairsFrameCount = resultSet.getInt("stairsFrameCount");
+                int passFrameCount = resultSet.getInt("passFrameCount");
+                int diagonalConnectionCount = resultSet.getInt("diagonalConnectionCount");
+                int horizontalConnectionCount = resultSet.getInt("horizontalConnectionCount");
+                int crossbarCount = resultSet.getInt("crossbarCount");
+                int deckCount = resultSet.getInt("deckCount");
+                int supportsCount = resultSet.getInt("supportsCount");
+                int stairsFrameBadCount = resultSet.getInt("stairsFrameBadCount");
+                int passFrameBadCount = resultSet.getInt("passFrameBadCount");
+                int diagonalConnectionBadCount = resultSet.getInt("diagonalConnectionBadCount");
+                int horizontalConnectionBadCount = resultSet.getInt("horizontalConnectionBadCount");
+                int crossbarBadCount = resultSet.getInt("crossbarBadCount");
+                int deckBadCount = resultSet.getInt("deckBadCount");
+                int supportsBadCount = resultSet.getInt("supportsBadCount");
+                Boolean operationsIsPerformed = false;
+                if (resultSet.getInt("performed") == 1) {
+                    operationsIsPerformed = true;
+                }
+                operations.add(new StorageOperation(date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount, deckCount, supportsCount,
+                        stairsFrameBadCount, passFrameBadCount, diagonalConnectionBadCount, horizontalConnectionBadCount, crossbarBadCount, deckBadCount, supportsBadCount, operationsIsPerformed));
+            }
+            return operations;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static List<StorageOperation> getOperations (String startDate, String endDate, String customer, String typeF) {
+//        Возвращает лист операций с учетом фильтров, должен работать даже если один, несколько или все фильтры не заданы
+        if (startDate == null || startDate.isEmpty()) {
+            startDate = "MIN";
+        }
+        if (endDate == null || endDate.isEmpty()){
+            endDate = "MAX";
+        }
+        if (customer != null && !customer.isEmpty()) {
+            customer = " AND customer = '" + customer + "'";
+        }
+        if (typeF != null && !typeF.isEmpty()) {
+            typeF = " AND type = '" + typeF + "'";
+        }
+        String filter = "WHERE (date BETWEEN " + startDate + " AND " + endDate + ")" + customer + typeF;
+        List<StorageOperation> operations = new ArrayList<>();
+        try {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Operations" + filter + " ORDER BY date DESC;");
+            while (resultSet.next()) {
+                String date = resultSet.getString("date");
+                String customerName = resultSet.getString("customerName");
+                String type = resultSet.getString("type");
+                int stairsFrameCount = resultSet.getInt("stairsFrameCount");
+                int passFrameCount = resultSet.getInt("passFrameCount");
+                int diagonalConnectionCount = resultSet.getInt("diagonalConnectionCount");
+                int horizontalConnectionCount = resultSet.getInt("horizontalConnectionCount");
+                int crossbarCount = resultSet.getInt("crossbarCount");
+                int deckCount = resultSet.getInt("deckCount");
+                int supportsCount = resultSet.getInt("supportsCount");
+                int stairsFrameBadCount = resultSet.getInt("stairsFrameBadCount");
+                int passFrameBadCount = resultSet.getInt("passFrameBadCount");
+                int diagonalConnectionBadCount = resultSet.getInt("diagonalConnectionBadCount");
+                int horizontalConnectionBadCount = resultSet.getInt("horizontalConnectionBadCount");
+                int crossbarBadCount = resultSet.getInt("crossbarBadCount");
+                int deckBadCount = resultSet.getInt("deckBadCount");
+                int supportsBadCount = resultSet.getInt("supportsBadCount");
+                Boolean operationsIsPerformed = false;
+                if (resultSet.getInt("performed") == 1) {
+                    operationsIsPerformed = true;
+                }
+                operations.add(new StorageOperation(date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount, deckCount, supportsCount,
+                        stairsFrameBadCount, passFrameBadCount, diagonalConnectionBadCount, horizontalConnectionBadCount, crossbarBadCount, deckBadCount, supportsBadCount, operationsIsPerformed));
+            }
+            return operations;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
 // Оба следующих метода не должны выполняться одновременно
     public static void insertOperation (StorageOperation operation) {
