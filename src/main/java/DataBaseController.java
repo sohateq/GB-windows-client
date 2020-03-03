@@ -112,8 +112,9 @@ public abstract class DataBaseController {
                             "crossbarBadCount, " +
                             "deckBadCount, " +
                             "supportsBadCount, " +
-                            "performed) VALUES('%d', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d')",
-                            id, date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount, deckCount, supportsCount,
+                            "performed) VALUES('%d', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d')",
+                            id, date, customerName, type,
+                            stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount, deckCount, supportsCount,
                             stairsFrameBadCount, passFrameBadCount, diagonalConnectionBadCount, horizontalConnectionBadCount, crossbarBadCount, deckBadCount, supportsBadCount, performed);
                     statement.execute(query);
                 } catch (SQLException e) {
@@ -198,11 +199,10 @@ public abstract class DataBaseController {
                 operations.add(new StorageOperation(date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount, deckCount, supportsCount,
                         stairsFrameBadCount, passFrameBadCount, diagonalConnectionBadCount, horizontalConnectionBadCount, crossbarBadCount, deckBadCount, supportsBadCount, performed));
             }
-            return operations;
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
         }
+        return operations;
     }
     public static List<StorageOperation> getOperations (String startDate, String endDate, String customer, String typeF, boolean isPerformed) {
 //        Возвращает лист операций с учетом фильтров, должен работать даже если один, несколько или все фильтры не заданы
@@ -251,11 +251,10 @@ public abstract class DataBaseController {
                 operations.add(new StorageOperation(date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount, deckCount, supportsCount,
                         stairsFrameBadCount, passFrameBadCount, diagonalConnectionBadCount, horizontalConnectionBadCount, crossbarBadCount, deckBadCount, supportsBadCount, operationsIsPerformed));
             }
-            return operations;
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
         }
+        return operations;
     }
 
     public static List<StorageOperation> getOperations (String startDate, String endDate, String customer, String typeF) {
@@ -301,13 +300,36 @@ public abstract class DataBaseController {
                 operations.add(new StorageOperation(date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount, deckCount, supportsCount,
                         stairsFrameBadCount, passFrameBadCount, diagonalConnectionBadCount, horizontalConnectionBadCount, crossbarBadCount, deckBadCount, supportsBadCount, operationsIsPerformed));
             }
-            return operations;
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
         }
+        return operations;
     }
 
+    public static List<String> getCustomers () {
+        List<String> customers = new ArrayList<>();
+        try {
+            ResultSet resultSet = statement.executeQuery("SELECT DISTINCT customerName FROM Operations ORDER BY customerName;");
+            while (resultSet.next()) {
+                customers.add(resultSet.getString("customerName"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return customers;
+    }
+    public static List<String> getType () {
+        List<String> types = new ArrayList<>();
+        try {
+            ResultSet resultSet = statement.executeQuery("SELECT DISTINCT type FROM Operations ORDER BY type;");
+            while (resultSet.next()) {
+                types.add(resultSet.getString("type"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return types;
+    }
 
 // Оба следующих метода не должны выполняться одновременно
     public static void insertOperation (StorageOperation operation) {
