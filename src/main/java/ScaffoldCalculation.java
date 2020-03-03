@@ -14,7 +14,7 @@ public class ScaffoldCalculation {
         if (levelCount - 1 > 0) deckLevelCount = levelCount - 1;
         int stairsFrameCount = (levelCount-1) * liftCount;
 
-        int passFrameCount = levelCount * ((sectionCount + 1) - deckLevelCount) + deckLevelCount;
+        int passFrameCount = levelCount * ((sectionCount + 1) - liftCount) + liftCount;
 
         int diagonalConnectionCount = ((height/3) * (length/2))/2;
 
