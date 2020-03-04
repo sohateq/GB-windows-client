@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-//        new MainWindow();
+        new MainWindow();
 //        DataBaseController.connect();
 //        DataBaseController.updateBalance();
 //        DataBaseController.updateOperations();
@@ -14,6 +14,6 @@ public class Main {
 //            System.out.println(operations.get(i).toString());
 //        }
 //        DataBaseController.disconnect();
-        new ScaffoldCalculation().calculate(30, 30, 1);
+//        new ScaffoldCalculation().calculate(30, 30, 1);
     }
 }

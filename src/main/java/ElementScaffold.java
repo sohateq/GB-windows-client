@@ -68,6 +68,13 @@ public class ElementScaffold {
         this.defectiveCount += append;
     }
 
+    public void countReduce  (int reduce) {
+        this.count -= reduce;
+    }
+
+    public void defectiveCountReduce (int reduce) {
+        this.defectiveCount -= reduce;
+    }
     @Override
     public String toString() {
         return "ElementScaffold{" +

@@ -163,11 +163,11 @@ public abstract class DataBaseController {
                 elementScaffolds.add(new ElementScaffold(elementName, count, defectiveCount, weight, buyingPrice));
             }
             elementScaffolds.toArray(balance);
-            return balance;
+
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
         }
+        return balance;
     }
 
     public static List<StorageOperation> getOperations () {
@@ -335,6 +335,23 @@ public abstract class DataBaseController {
     public static void insertOperation (StorageOperation operation) {
 //        Добавляет в локальную и серверную базу данных операций новую операцию (лучше сделать в отдельном потоке)
         new Thread(()->{
+            ElementScaffold [] balance = getBalance();
+            balance[0].countReduce(operation.getStairsFrameCount());
+            balance[0].defectiveCountReduce(operation.getStairsFrameBadCount());
+            balance[1].countReduce(operation.getPassFrameCount());
+            balance[1].defectiveCountReduce(operation.getPassFrameBadCount());
+            balance[2].countReduce(operation.getDiagonalConnectionCount());
+            balance[2].defectiveCountReduce(operation.getDiagonalConnectionBadCount());
+            balance[3].countReduce(operation.getHorizontalConnectionCount());
+            balance[3].defectiveCountReduce(operation.getHorizontalConnectionBadCount());
+            balance[4].countReduce(operation.getCrossbarCount());
+            balance[4].defectiveCountReduce(operation.getCrossbarBadCount());
+            balance[5].countReduce(operation.getDeckCount());
+            balance[5].defectiveCountReduce(operation.getDeckBadCount());
+            balance[6].countReduce(operation.getSupportsCount());
+            balance[6].defectiveCountReduce(operation.getSupportsBadCount());
+            ClientController.getInstance().changeBalance(balance);
+            updateBalance();
             ClientController.getInstance().createOperation(operation);
             updateOperations();
         }).start();
