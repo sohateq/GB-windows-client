@@ -13,19 +13,12 @@ public class ScaffoldCalculation {
         int deckLevelCount = 1;
         if (levelCount - 1 > 0) deckLevelCount = levelCount - 1;
         int stairsFrameCount = (levelCount-1) * liftCount;
-
         int passFrameCount = levelCount * ((sectionCount + 1) - liftCount) + liftCount;
-
         int diagonalConnectionCount = ((height/3) * (length/2))/2;
-
         int horizontalConnectionCount = diagonalConnectionCount * 3;
-
         int crossbarCount = deckLevelCount * sectionCount * 2;
-
         int deckCount = sectionCount * deckLevelCount * 3;
-
         int supportsCount = (sectionCount + 1) * 2;
-
         double costPerDay = height * length * squareMeterCost;
 
     }
