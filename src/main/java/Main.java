@@ -1,8 +1,3 @@
-import GUI.*;
-import retrofitModel.entity.StorageOperation;
-
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
         new MainWindow();

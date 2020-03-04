@@ -1,5 +1,3 @@
-import GUI.OperationsListGUI;
-import com.google.gson.annotations.Expose;
 import retrofitModel.entity.StorageOperation;
 
 import java.sql.*;
@@ -359,10 +357,10 @@ public abstract class DataBaseController {
 
     public static void inventory (ElementScaffold[] balance) {
 //        Меняет локальную и серверную базу данных баланса (лучше сделать в отдельном потоке)
-        new Thread(()-> {
+//        new Thread(()-> {
             ClientController.getInstance().changeBalance(balance);
             updateBalance();
-        }).start();
+//        }).start();
 
     }
 }

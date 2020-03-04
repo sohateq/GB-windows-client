@@ -6,6 +6,9 @@ public class ElementScaffold {
     private double weight;
     private double buyingPrice;
 
+    public ElementScaffold() {
+    }
+
     public ElementScaffold(String name, int count, int defectiveCount, double weight, double buyingPrice) {
         this.name = name;
         this.count = count;

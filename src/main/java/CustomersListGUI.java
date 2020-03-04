@@ -1,36 +1,23 @@
-package GUI;
-
 import javax.swing.*;
 
-public class OperationsListGUI extends JFrame {
-    private JPanel RootPanel;
+public class CustomersListGUI extends JFrame {
     private JButton backButton;
+    private JTextField searchTextField;
+    private JButton searchButton;
+    private JList customersList;
+    private JLabel nameCustomerLabel;
+    private JLabel phoneCustomerLabel;
+    private JLabel addressCustomerLabel;
+    private JLabel operationsLabel;
+    private JTextArea nameCustomerTextArea;
+    private JTextArea phoneCustomerTextArea;
+    private JTextArea addressCustomerTextArea;
     private JList operationsList;
     private JScrollPane operationsScrollPane;
-    private JLabel filterLabel;
-    private JLabel periodLabel;
-    private JLabel customerComboBoxLabel;
-    private JLabel typeComboBoxLabel;
-    private JComboBox customersComboBox;
-    private JComboBox typeComboBox;
-    private JLabel dashLabel;
-    private JButton applyButton;
-    private JButton resetButton;
-    private JLabel infoLabel;
-    private JLabel dateLabel;
-    private JTextField dateTextField;
-    private JLabel customerLabel;
-    private JTextField customerTextField;
-    private JLabel typeLabel;
-    private JTextField typeTextField;
-    private JComboBox startDayComboBox;
-    private JComboBox startMonthComboBox;
-    private JComboBox startYearComboBox;
-    private JComboBox endDayComboBox;
-    private JComboBox endMonthComboBox;
-    private JComboBox endYearComboBox;
-    private JComboBox statusComboBox;
-    private JLabel statusComboBoxLabel;
+    private JLabel operationsContentLabel;
+    private JLabel customerBalanceLabel;
+    private JPanel RootPanel;
+    private JScrollPane customersListScrollPane;
     private JPanel InfoPane;
     private JLabel stairsFrameCountLabel;
     private JLabel passFrameCountLabel;
@@ -46,8 +33,6 @@ public class OperationsListGUI extends JFrame {
     private JTextField crossbarCountTextField;
     private JTextField deckCountTextField;
     private JTextField supportCountTextField;
-    private JLabel statusLabel;
-    private JTextField statusTextField;
     private JLabel stairsFrameBadCountLabel;
     private JLabel passFrameBadCountLabel;
     private JLabel diagonalConnectionBadCountLabel;
@@ -62,10 +47,25 @@ public class OperationsListGUI extends JFrame {
     private JTextField crossbarBadCountTextField;
     private JTextField deckBadCountTextField;
     private JTextField supportBadCountTextField;
+    private JPanel CustomersBalance;
+    private JLabel stairsFrameBalanceLabel;
+    private JLabel passFrameBalanceLabel;
+    private JLabel diagonalConnectionBalanceLabel;
+    private JLabel horizontalConnectionBalanceLabel;
+    private JLabel crossbarBalanceLabel;
+    private JLabel deckBalanceLabel;
+    private JLabel supportBalanceLabel;
+    private JTextField stairsFrameBalanceTextField;
+    private JTextField passFrameBalanceTextField;
+    private JTextField diagonalConnectionBalanceTextField;
+    private JTextField horizontalConnectionBalanceTextField;
+    private JTextField crossbarBalanceTextField;
+    private JTextField deckBalanceTextField;
+    private JTextField supportBalanceTextField;
     private MainWindow mainWindow;
     private JFrame fromWindow;
 
-    public OperationsListGUI(MainWindow mainWindow, JFrame fromWindow) {
+    public CustomersListGUI(MainWindow mainWindow, JFrame fromWindow) {
         this.mainWindow = mainWindow;
         this.fromWindow = fromWindow;
         setContentPane(RootPanel);

@@ -1,5 +1,3 @@
-package GUI;
-
 import javax.swing.*;
 
 public class ManagerGUI extends JFrame {
