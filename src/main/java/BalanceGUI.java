@@ -179,7 +179,7 @@ public class BalanceGUI extends JFrame {
                 DataBaseController.updateBalance();
                 loadBalance();
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "В поля могут быть введены только числа! \n Дробные значения пиите через точку!", "Предупреждение", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "В поля могут быть введены только числа! \n Дробные значения пишите через точку!", "Предупреждение", JOptionPane.ERROR_MESSAGE);
             }
 
         }
