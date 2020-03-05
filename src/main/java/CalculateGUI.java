@@ -166,7 +166,7 @@ public class CalculateGUI extends JFrame {
             depositTextField.setText(((constructionTotalCoast/10)*4) + "");
             sellCostTextField.setText(constructionTotalCoast + " / " + ((constructionTotalCoast/10)*7));
 
-            stairsFrameCountTextField.setText(sectionCount + "");
+            stairsFrameCountTextField.setText(stairsFrameCount + "");
             stairsFrameUnitWeightTextField.setText(stairsFrameUnitWeight + "");
             stairsFrameTotalWeightTextField.setText(stairsFrameTotalWeight + "");
             stairsFrameUnitCostTextField.setText(stairsFrameUnitCost + "");
@@ -215,17 +215,6 @@ public class CalculateGUI extends JFrame {
 
     private void elementsCalculate () {
         try {
-            int height = Integer.parseInt(heightField.getText());
-            int length = Integer.parseInt(lengthField.getText());
-            double squareMeterCost = Double.parseDouble(costField.getText());
-            if (height%2 == 1) height++;
-            if (length%3 == 2) length++;
-            if (length%3 == 1) length--;
-            int levelCount = height/2;
-            int sectionCount = length/3;
-            int liftCount = 1 + (length/30);
-            int deckLevelCount = 1;
-            if (levelCount - 1 > 0) deckLevelCount = levelCount - 1;
             int stairsFrameCount = Integer.parseInt(stairsFrameCountTextField.getText());
             int passFrameCount = Integer.parseInt(passFrameCountTextField.getText());
             int diagonalConnectionCount = Integer.parseInt(diagonalConnectionCountTextField.getText());
@@ -277,7 +266,7 @@ public class CalculateGUI extends JFrame {
             depositTextField.setText(((constructionTotalCoast/10)*4) + "");
             sellCostTextField.setText(constructionTotalCoast + " / " + ((constructionTotalCoast/10)*7));
 
-            stairsFrameCountTextField.setText(sectionCount + "");
+            stairsFrameCountTextField.setText(stairsFrameCount + "");
             stairsFrameUnitWeightTextField.setText(stairsFrameUnitWeight + "");
             stairsFrameTotalWeightTextField.setText(stairsFrameTotalWeight + "");
             stairsFrameUnitCostTextField.setText(stairsFrameUnitCost + "");
