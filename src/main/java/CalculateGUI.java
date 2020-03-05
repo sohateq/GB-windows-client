@@ -1,4 +1,8 @@
+import com.google.gson.annotations.Expose;
+import retrofitModel.entity.StorageOperation;
+
 import javax.swing.*;
+import java.util.List;
 
 public class CalculateGUI extends JFrame {
     private JPanel RootPanel;
@@ -20,7 +24,6 @@ public class CalculateGUI extends JFrame {
     private JLabel customerLabel;
     private JComboBox customersComboBox;
     private JButton createShipmentButton;
-    private JButton createCustomerButton;
     private JLabel dateLabel;
     private JComboBox dayComboBox;
     private JComboBox monthComboBox;
@@ -82,9 +85,11 @@ public class CalculateGUI extends JFrame {
         this.fromWindow = fromWindow;
         this.balance = DataBaseController.getBalance();
         setContentPane(RootPanel);
+        fillComboBoxes();
         setBackButtonAction();
         setCalcButtonAction();
         setElementCalcButtonAction();
+        setCreateShipmentButtonAction();
     }
 
     private void setBackButtonAction() {
@@ -100,6 +105,10 @@ public class CalculateGUI extends JFrame {
 
     private void setElementCalcButtonAction () {
         elementCalcButton.addActionListener(e -> elementsCalculate());
+    }
+
+    private void setCreateShipmentButtonAction () {
+        createShipmentButton.addActionListener(e -> createOperation());
     }
 
     private void calculate () {
@@ -162,52 +171,51 @@ public class CalculateGUI extends JFrame {
             double constructionTotalCoast = stairsFrameTotalCost + passFrameTotalCost + diagonalConnectionTotalCost + horizontalConnectionTotalCost +
                     crossbarTotalCost + deckTotalCost + supportTotalCost;
 
-            rentCostTextField.setText((costPerDay * 30) + " / " + costPerDay);
+            rentCostTextField.setText(String.format("%.2f", (costPerDay * 30)) + " / " + String.format("%.2f", costPerDay));
             depositTextField.setText(((constructionTotalCoast/10)*4) + "");
-            sellCostTextField.setText(constructionTotalCoast + " / " + ((constructionTotalCoast/10)*7));
+            sellCostTextField.setText(String.format("%.2f", constructionTotalCoast) + " / " + String.format("%.2f", ((constructionTotalCoast/10)*7)));
 
             stairsFrameCountTextField.setText(stairsFrameCount + "");
-            stairsFrameUnitWeightTextField.setText(stairsFrameUnitWeight + "");
-            stairsFrameTotalWeightTextField.setText(stairsFrameTotalWeight + "");
-            stairsFrameUnitCostTextField.setText(stairsFrameUnitCost + "");
-            stairsFrameTotalCostTextField.setText(stairsFrameTotalCost + "");
-            stairsFrameTotalCostTextField.setText(stairsFrameTotalCost + "");
+            stairsFrameUnitWeightTextField.setText(String.format("%.1f", stairsFrameUnitWeight));
+            stairsFrameTotalWeightTextField.setText(String.format("%.1f", stairsFrameTotalWeight));
+            stairsFrameUnitCostTextField.setText(String.format("%.2f", stairsFrameUnitCost));
+            stairsFrameTotalCostTextField.setText(String.format("%.2f", stairsFrameTotalCost));
 
             passFrameCountTextField.setText(passFrameCount + "");
-            passFrameUnitWeightTextField.setText(passFrameUnitWeight + "");
-            passFrameTotalWeightTextField.setText(passFrameTotalWeight + "");
-            passFrameUnitCostTextField.setText(passFrameUnitCost + "");
-            passFrameTotalCostTextField.setText(passFrameTotalCost + "");
+            passFrameUnitWeightTextField.setText(String.format("%.1f", passFrameUnitWeight));
+            passFrameTotalWeightTextField.setText(String.format("%.1f", passFrameTotalWeight));
+            passFrameUnitCostTextField.setText(String.format("%.2f", passFrameUnitCost));
+            passFrameTotalCostTextField.setText(String.format("%.2f", passFrameTotalCost));
 
             diagonalConnectionCountTextField.setText(diagonalConnectionCount + "");
-            diagonalConnectionUnitWeightTextField.setText(diagonalConnectionUnitWeight + "");
-            diagonalConnectionTotalWeightTextField.setText(diagonalConnectionTotalWeight + "");
-            diagonalConnectionUnitCostTextField.setText(diagonalConnectionUnitCost + "");
-            diagonalConnectionTotalCostTextField.setText(diagonalConnectionTotalCost + "");
+            diagonalConnectionUnitWeightTextField.setText(String.format("%.1f", diagonalConnectionUnitWeight));
+            diagonalConnectionTotalWeightTextField.setText(String.format("%.1f", diagonalConnectionTotalWeight));
+            diagonalConnectionUnitCostTextField.setText(String.format("%.2f", diagonalConnectionUnitCost));
+            diagonalConnectionTotalCostTextField.setText(String.format("%.2f", diagonalConnectionTotalCost));
 
             horizontalConnectionCountTextField.setText(horizontalConnectionCount + "");
-            horizontalConnectionUnitWeightTextField.setText(horizontalConnectionUnitWeight + "");
-            horizontalConnectionTotalWeightTextField.setText(horizontalConnectionTotalWeight + "");
-            horizontalConnectionUnitCostTextField.setText(horizontalConnectionUnitCost + "");
-            horizontalConnectionTotalCostTextField.setText(horizontalConnectionTotalCost + "");
+            horizontalConnectionUnitWeightTextField.setText(String.format("%.1f", horizontalConnectionUnitWeight));
+            horizontalConnectionTotalWeightTextField.setText(String.format("%.1f", horizontalConnectionTotalWeight));
+            horizontalConnectionUnitCostTextField.setText(String.format("%.2f", horizontalConnectionUnitCost));
+            horizontalConnectionTotalCostTextField.setText(String.format("%.2f", horizontalConnectionTotalCost));
 
             crossbarCountTextField.setText(crossbarCount + "");
-            crossbarUnitWeightTextField.setText(crossbarUnitWeight + "");
-            crossbarTotalWeightTextField.setText(crossbarTotalWeight + "");
-            crossbarUnitCostTextField.setText(crossbarUnitCost + "");
-            crossbarTotalCostTextField.setText(crossbarTotalCost + "");
+            crossbarUnitWeightTextField.setText(String.format("%.1f", crossbarUnitWeight));
+            crossbarTotalWeightTextField.setText(String.format("%.1f", crossbarTotalWeight));
+            crossbarUnitCostTextField.setText(String.format("%.2f", crossbarUnitCost));
+            crossbarTotalCostTextField.setText(String.format("%.2f", crossbarTotalCost));
 
             deckCountTextField.setText(deckCount + "");
             deckUnitWeightTextField.setText(deckUnitWeight + "");
             deckTotalWeightTextField.setText(deckTotalWeight + "");
-            deckUnitCostTextField.setText(deckUnitCost + "");
-            deckTotalCostTextField.setText(deckTotalCost + "");
+            deckUnitCostTextField.setText(String.format("%.2f", deckUnitCost));
+            deckTotalCostTextField.setText(String.format("%.2f", deckTotalCost));
 
             supportCountTextField.setText(supportCount + "");
             supportUnitWeightTextField.setText(supportUnitWeight + "");
             supportTotalWeightTextField.setText(supportTotalWeight + "");
-            supportUnitCostTextField.setText(supportUnitCost + "");
-            supportTotalCostTextField.setText(supportTotalCost + "");
+            supportUnitCostTextField.setText(String.format("%.2f", supportUnitCost));
+            supportTotalCostTextField.setText(String.format("%.2f", supportTotalCost));
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "В поля могут быть введены только числа! \n Дробные значения пишите через точку!", "Предупреждение", JOptionPane.ERROR_MESSAGE);
         }
@@ -262,54 +270,101 @@ public class CalculateGUI extends JFrame {
             double constructionTotalCoast = stairsFrameTotalCost + passFrameTotalCost + diagonalConnectionTotalCost + horizontalConnectionTotalCost +
                     crossbarTotalCost + deckTotalCost + supportTotalCost;
 
-            rentCostTextField.setText((constructionTotalCoast / 10) + " / " + (constructionTotalCoast / 300));
-            depositTextField.setText(((constructionTotalCoast/10)*4) + "");
-            sellCostTextField.setText(constructionTotalCoast + " / " + ((constructionTotalCoast/10)*7));
+            rentCostTextField.setText(String.format("%.2f", (constructionTotalCoast / 10)) + " / " + String.format("%.2f", (constructionTotalCoast / 300)));
+            depositTextField.setText(String.format("%.2f", ((constructionTotalCoast/10)*4)));
+            sellCostTextField.setText(String.format("%.2f", constructionTotalCoast) + " / " + String.format("%.2f", ((constructionTotalCoast/10)*7)));
 
             stairsFrameCountTextField.setText(stairsFrameCount + "");
-            stairsFrameUnitWeightTextField.setText(stairsFrameUnitWeight + "");
-            stairsFrameTotalWeightTextField.setText(stairsFrameTotalWeight + "");
-            stairsFrameUnitCostTextField.setText(stairsFrameUnitCost + "");
-            stairsFrameTotalCostTextField.setText(stairsFrameTotalCost + "");
-            stairsFrameTotalCostTextField.setText(stairsFrameTotalCost + "");
+            stairsFrameUnitWeightTextField.setText(String.format("%.1f", stairsFrameUnitWeight));
+            stairsFrameTotalWeightTextField.setText(String.format("%.1f", stairsFrameTotalWeight));
+            stairsFrameUnitCostTextField.setText(String.format("%.2f", stairsFrameUnitCost));
+            stairsFrameTotalCostTextField.setText(String.format("%.2f", stairsFrameTotalCost));
 
             passFrameCountTextField.setText(passFrameCount + "");
-            passFrameUnitWeightTextField.setText(passFrameUnitWeight + "");
-            passFrameTotalWeightTextField.setText(passFrameTotalWeight + "");
-            passFrameUnitCostTextField.setText(passFrameUnitCost + "");
-            passFrameTotalCostTextField.setText(passFrameTotalCost + "");
+            passFrameUnitWeightTextField.setText(String.format("%.1f", passFrameUnitWeight));
+            passFrameTotalWeightTextField.setText(String.format("%.1f", passFrameTotalWeight));
+            passFrameUnitCostTextField.setText(String.format("%.2f", passFrameUnitCost));
+            passFrameTotalCostTextField.setText(String.format("%.2f", passFrameTotalCost));
 
             diagonalConnectionCountTextField.setText(diagonalConnectionCount + "");
-            diagonalConnectionUnitWeightTextField.setText(diagonalConnectionUnitWeight + "");
-            diagonalConnectionTotalWeightTextField.setText(diagonalConnectionTotalWeight + "");
-            diagonalConnectionUnitCostTextField.setText(diagonalConnectionUnitCost + "");
-            diagonalConnectionTotalCostTextField.setText(diagonalConnectionTotalCost + "");
+            diagonalConnectionUnitWeightTextField.setText(String.format("%.1f", diagonalConnectionUnitWeight));
+            diagonalConnectionTotalWeightTextField.setText(String.format("%.1f", diagonalConnectionTotalWeight));
+            diagonalConnectionUnitCostTextField.setText(String.format("%.2f", diagonalConnectionUnitCost));
+            diagonalConnectionTotalCostTextField.setText(String.format("%.2f", diagonalConnectionTotalCost));
 
             horizontalConnectionCountTextField.setText(horizontalConnectionCount + "");
-            horizontalConnectionUnitWeightTextField.setText(horizontalConnectionUnitWeight + "");
-            horizontalConnectionTotalWeightTextField.setText(horizontalConnectionTotalWeight + "");
-            horizontalConnectionUnitCostTextField.setText(horizontalConnectionUnitCost + "");
-            horizontalConnectionTotalCostTextField.setText(horizontalConnectionTotalCost + "");
+            horizontalConnectionUnitWeightTextField.setText(String.format("%.1f", horizontalConnectionUnitWeight));
+            horizontalConnectionTotalWeightTextField.setText(String.format("%.1f", horizontalConnectionTotalWeight));
+            horizontalConnectionUnitCostTextField.setText(String.format("%.2f", horizontalConnectionUnitCost));
+            horizontalConnectionTotalCostTextField.setText(String.format("%.2f", horizontalConnectionTotalCost));
 
             crossbarCountTextField.setText(crossbarCount + "");
-            crossbarUnitWeightTextField.setText(crossbarUnitWeight + "");
-            crossbarTotalWeightTextField.setText(crossbarTotalWeight + "");
-            crossbarUnitCostTextField.setText(crossbarUnitCost + "");
-            crossbarTotalCostTextField.setText(crossbarTotalCost + "");
+            crossbarUnitWeightTextField.setText(String.format("%.1f", crossbarUnitWeight));
+            crossbarTotalWeightTextField.setText(String.format("%.1f", crossbarTotalWeight));
+            crossbarUnitCostTextField.setText(String.format("%.2f", crossbarUnitCost));
+            crossbarTotalCostTextField.setText(String.format("%.2f", crossbarTotalCost));
 
             deckCountTextField.setText(deckCount + "");
             deckUnitWeightTextField.setText(deckUnitWeight + "");
             deckTotalWeightTextField.setText(deckTotalWeight + "");
-            deckUnitCostTextField.setText(deckUnitCost + "");
-            deckTotalCostTextField.setText(deckTotalCost + "");
+            deckUnitCostTextField.setText(String.format("%.2f", deckUnitCost));
+            deckTotalCostTextField.setText(String.format("%.2f", deckTotalCost));
 
             supportCountTextField.setText(supportCount + "");
             supportUnitWeightTextField.setText(supportUnitWeight + "");
             supportTotalWeightTextField.setText(supportTotalWeight + "");
-            supportUnitCostTextField.setText(supportUnitCost + "");
-            supportTotalCostTextField.setText(supportTotalCost + "");
+            supportUnitCostTextField.setText(String.format("%.2f", supportUnitCost));
+            supportTotalCostTextField.setText(String.format("%.2f", supportTotalCost));
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "В поля могут быть введены только числа! \n Дробные значения пишите через точку!", "Предупреждение", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void createOperation () {
+        String date = yearComboBox.getSelectedItem().toString() + "-" + monthComboBox.getSelectedItem().toString() + "-" + dayComboBox.getSelectedItem().toString();
+        String customerName = customersComboBox.getSelectedItem().toString();
+        String type = "отгрузка";
+        int stairsFrameCount = Integer.parseInt(stairsFrameCountTextField.getText());
+        int passFrameCount = Integer.parseInt(passFrameCountTextField.getText());
+        int diagonalConnectionCount = Integer.parseInt(diagonalConnectionCountTextField.getText());
+        int horizontalConnectionCount = Integer.parseInt(horizontalConnectionCountTextField.getText());
+        int crossbarCount = Integer.parseInt(crossbarCountTextField.getText());
+        int deckCount = Integer.parseInt(deckCountTextField.getText());
+        int supportCount = Integer.parseInt(supportCountTextField.getText());
+        int stairsFrameBadCount = 0;
+        int passFrameBadCount = 0;
+        int diagonalConnectionBadCount = 0;
+        int horizontalConnectionBadCount = 0;
+        int crossbarBadCount = 0;
+        int deckBadCount = 0;
+        int supportBadCount = 0;
+        boolean performed = false;
+        StorageOperation operation = new StorageOperation(date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount,
+                deckCount, supportCount, stairsFrameBadCount, passFrameBadCount, diagonalConnectionBadCount, horizontalConnectionBadCount, crossbarBadCount, deckBadCount, supportBadCount, performed);
+        DataBaseController.operationInsert(operation);
+    }
+
+    private void fillComboBoxes () {
+
+        int year = 2019;
+        for (int i = 0; i < 20; i++) {
+            yearComboBox.addItem(year + "");
+            year++;
+        }
+
+        for (int i = 0; i < 12; i++) {
+            String month = String.format("%02d", (i+1));
+            monthComboBox.addItem(month);
+        }
+        for (int i = 0; i < 31; i++) {
+            String day = String.format("%02d", (i+1));
+            dayComboBox.addItem(day);
+        }
+
+        List<String> customers = DataBaseController.getCustomers();
+        customersComboBox.addItem("");
+        for (int i = 0; i < customers.size(); i++) {
+            customersComboBox.addItem(customers.get(i));
         }
     }
 }

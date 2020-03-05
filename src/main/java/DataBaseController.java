@@ -330,37 +330,83 @@ public abstract class DataBaseController {
     }
 
 // Оба следующих метода не должны выполняться одновременно
-    public static void insertOperation (StorageOperation operation) {
+    public static void operationInsert (StorageOperation operation) {
 //        Добавляет в локальную и серверную базу данных операций новую операцию (лучше сделать в отдельном потоке)
         new Thread(()->{
-            ElementScaffold [] balance = getBalance();
-            balance[0].countReduce(operation.getStairsFrameCount());
-            balance[0].defectiveCountReduce(operation.getStairsFrameBadCount());
-            balance[1].countReduce(operation.getPassFrameCount());
-            balance[1].defectiveCountReduce(operation.getPassFrameBadCount());
-            balance[2].countReduce(operation.getDiagonalConnectionCount());
-            balance[2].defectiveCountReduce(operation.getDiagonalConnectionBadCount());
-            balance[3].countReduce(operation.getHorizontalConnectionCount());
-            balance[3].defectiveCountReduce(operation.getHorizontalConnectionBadCount());
-            balance[4].countReduce(operation.getCrossbarCount());
-            balance[4].defectiveCountReduce(operation.getCrossbarBadCount());
-            balance[5].countReduce(operation.getDeckCount());
-            balance[5].defectiveCountReduce(operation.getDeckBadCount());
-            balance[6].countReduce(operation.getSupportsCount());
-            balance[6].defectiveCountReduce(operation.getSupportsBadCount());
-            ClientController.getInstance().changeBalance(balance);
-            updateBalance();
+            if (operation.getPerformed() && operation.getType().equalsIgnoreCase("отгрузка")) {
+                ElementScaffold [] balance = getBalance();
+                balance[0].countReduce(operation.getStairsFrameCount());
+                balance[0].defectiveCountReduce(operation.getStairsFrameBadCount());
+                balance[1].countReduce(operation.getPassFrameCount());
+                balance[1].defectiveCountReduce(operation.getPassFrameBadCount());
+                balance[2].countReduce(operation.getDiagonalConnectionCount());
+                balance[2].defectiveCountReduce(operation.getDiagonalConnectionBadCount());
+                balance[3].countReduce(operation.getHorizontalConnectionCount());
+                balance[3].defectiveCountReduce(operation.getHorizontalConnectionBadCount());
+                balance[4].countReduce(operation.getCrossbarCount());
+                balance[4].defectiveCountReduce(operation.getCrossbarBadCount());
+                balance[5].countReduce(operation.getDeckCount());
+                balance[5].defectiveCountReduce(operation.getDeckBadCount());
+                balance[6].countReduce(operation.getSupportsCount());
+                balance[6].defectiveCountReduce(operation.getSupportsBadCount());
+                ClientController.getInstance().editBalance(balance);
+                updateBalance();
+            } else if (operation.getPerformed() && !operation.getType().equalsIgnoreCase("отгрузка")) {
+                ElementScaffold [] balance = getBalance();
+                balance[0].countAppend(operation.getStairsFrameCount());
+                balance[0].defectiveCountAppend(operation.getStairsFrameBadCount());
+                balance[1].countAppend(operation.getPassFrameCount());
+                balance[1].defectiveCountAppend(operation.getPassFrameBadCount());
+                balance[2].countAppend(operation.getDiagonalConnectionCount());
+                balance[2].defectiveCountAppend(operation.getDiagonalConnectionBadCount());
+                balance[3].countAppend(operation.getHorizontalConnectionCount());
+                balance[3].defectiveCountAppend(operation.getHorizontalConnectionBadCount());
+                balance[4].countAppend(operation.getCrossbarCount());
+                balance[4].defectiveCountAppend(operation.getCrossbarBadCount());
+                balance[5].countAppend(operation.getDeckCount());
+                balance[5].defectiveCountAppend(operation.getDeckBadCount());
+                balance[6].countAppend(operation.getSupportsCount());
+                balance[6].defectiveCountAppend(operation.getSupportsBadCount());
+                ClientController.getInstance().editBalance(balance);
+                updateBalance();
+            }
             ClientController.getInstance().createOperation(operation);
             updateOperations();
         }).start();
     }
 
+    public static void operationPerform (StorageOperation operation) {
+        new Thread(() -> {
+            if (operation.getPerformed() && operation.getId() != null && operation.getType().equalsIgnoreCase("отгрузка")) {
+                ElementScaffold [] balance = getBalance();
+                balance[0].countReduce(operation.getStairsFrameCount());
+                balance[0].defectiveCountReduce(operation.getStairsFrameBadCount());
+                balance[1].countReduce(operation.getPassFrameCount());
+                balance[1].defectiveCountReduce(operation.getPassFrameBadCount());
+                balance[2].countReduce(operation.getDiagonalConnectionCount());
+                balance[2].defectiveCountReduce(operation.getDiagonalConnectionBadCount());
+                balance[3].countReduce(operation.getHorizontalConnectionCount());
+                balance[3].defectiveCountReduce(operation.getHorizontalConnectionBadCount());
+                balance[4].countReduce(operation.getCrossbarCount());
+                balance[4].defectiveCountReduce(operation.getCrossbarBadCount());
+                balance[5].countReduce(operation.getDeckCount());
+                balance[5].defectiveCountReduce(operation.getDeckBadCount());
+                balance[6].countReduce(operation.getSupportsCount());
+                balance[6].defectiveCountReduce(operation.getSupportsBadCount());
+                ClientController.getInstance().editBalance(balance);
+                updateBalance();
+                ClientController.getInstance().editOperation(operation);
+                updateOperations();
+            }
+        }).start();
+    }
+
     public static void inventory (ElementScaffold[] balance) {
 //        Меняет локальную и серверную базу данных баланса (лучше сделать в отдельном потоке)
-//        new Thread(()-> {
-            ClientController.getInstance().changeBalance(balance);
+        new Thread(()-> {
+            ClientController.getInstance().editBalance(balance);
             updateBalance();
-//        }).start();
+        }).start();
 
     }
 }

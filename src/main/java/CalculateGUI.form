@@ -148,14 +148,7 @@
         </constraints>
         <properties>
           <editable value="true"/>
-        </properties>
-      </component>
-      <component id="de26" class="javax.swing.JButton" binding="createCustomerButton">
-        <constraints>
-          <grid row="0" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Создать контрагента"/>
+          <model/>
         </properties>
       </component>
       <grid id="45269" binding="InfoPane" layout-manager="GridLayoutManager" row-count="8" column-count="8" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -230,7 +223,9 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="25d1c" class="javax.swing.JTextField" binding="passFrameCountTextField">
             <constraints>
@@ -238,7 +233,9 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="d52a8" class="javax.swing.JTextField" binding="diagonalConnectionCountTextField">
             <constraints>
@@ -246,7 +243,9 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="c23e6" class="javax.swing.JTextField" binding="horizontalConnectionCountTextField">
             <constraints>
@@ -254,7 +253,9 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="2026b" class="javax.swing.JTextField" binding="crossbarCountTextField">
             <constraints>
@@ -262,7 +263,9 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="65f67" class="javax.swing.JTextField" binding="deckCountTextField">
             <constraints>
@@ -270,7 +273,9 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="d5e7e" class="javax.swing.JTextField" binding="supportCountTextField">
             <constraints>
@@ -278,7 +283,9 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <text value="0"/>
+            </properties>
           </component>
           <hspacer id="5a496">
             <constraints>
@@ -314,6 +321,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="914a7" class="javax.swing.JTextField" binding="passFrameUnitWeightTextField">
@@ -324,6 +332,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="23ab4" class="javax.swing.JTextField" binding="diagonalConnectionUnitWeightTextField">
@@ -334,6 +343,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="f316e" class="javax.swing.JTextField" binding="horizontalConnectionUnitWeightTextField">
@@ -344,6 +354,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="76e6b" class="javax.swing.JTextField" binding="crossbarUnitWeightTextField">
@@ -354,6 +365,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="2fcb0" class="javax.swing.JTextField" binding="deckUnitWeightTextField">
@@ -364,6 +376,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="2336e" class="javax.swing.JTextField" binding="supportUnitWeightTextField">
@@ -374,6 +387,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="205b9" class="javax.swing.JLabel" binding="totalWeightLabel">
@@ -392,6 +406,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="90064" class="javax.swing.JTextField" binding="passFrameTotalWeightTextField">
@@ -402,6 +417,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="37561" class="javax.swing.JTextField" binding="diagonalConnectionTotalWeightTextField">
@@ -412,6 +428,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="4b0e5" class="javax.swing.JTextField" binding="horizontalConnectionTotalWeightTextField">
@@ -422,6 +439,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="7dc7b" class="javax.swing.JTextField" binding="crossbarTotalWeightTextField">
@@ -432,7 +450,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
-              <text value=""/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="a1d9a" class="javax.swing.JTextField" binding="deckTotalWeightTextField">
@@ -443,6 +461,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="e71f2" class="javax.swing.JTextField" binding="supportTotalWeightTextField">
@@ -453,6 +472,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="33384" class="javax.swing.JLabel" binding="unitCostLabel">
@@ -471,6 +491,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="aafe6" class="javax.swing.JTextField" binding="passFrameUnitCostTextField">
@@ -481,6 +502,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="655f8" class="javax.swing.JTextField" binding="diagonalConnectionUnitCostTextField">
@@ -491,6 +513,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="b93" class="javax.swing.JTextField" binding="horizontalConnectionUnitCostTextField">
@@ -501,6 +524,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="5471e" class="javax.swing.JTextField" binding="crossbarUnitCostTextField">
@@ -511,7 +535,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
-              <text value=""/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="f8441" class="javax.swing.JTextField" binding="deckUnitCostTextField">
@@ -522,6 +546,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="b56ac" class="javax.swing.JTextField" binding="supportUnitCostTextField">
@@ -532,6 +557,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="d3958" class="javax.swing.JLabel" binding="totalCostLabel">
@@ -550,6 +576,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="641f4" class="javax.swing.JTextField" binding="passFrameTotalCostTextField">
@@ -560,6 +587,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="92abc" class="javax.swing.JTextField" binding="diagonalConnectionTotalCostTextField">
@@ -570,6 +598,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="782e1" class="javax.swing.JTextField" binding="horizontalConnectionTotalCostTextField">
@@ -580,6 +609,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="53d08" class="javax.swing.JTextField" binding="crossbarTotalCostTextField">
@@ -590,7 +620,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
-              <text value=""/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="9070" class="javax.swing.JTextField" binding="deckTotalCostTextField">
@@ -601,6 +631,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="ece38" class="javax.swing.JTextField" binding="supportTotalCostTextField">
@@ -611,6 +642,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <text value="0"/>
             </properties>
           </component>
         </children>
@@ -629,15 +661,19 @@
             <preferred-size width="70" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <toolTipText value=""/>
+        </properties>
       </component>
       <component id="84708" class="javax.swing.JComboBox" binding="monthComboBox">
         <constraints>
           <grid row="3" column="9" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="4" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
+            <preferred-size width="70" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <toolTipText value=""/>
+        </properties>
       </component>
       <component id="6621a" class="javax.swing.JComboBox" binding="yearComboBox">
         <constraints>
@@ -646,7 +682,9 @@
             <maximum-size width="100" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <toolTipText value=""/>
+        </properties>
       </component>
       <component id="5b72a" class="javax.swing.JButton" binding="createShipmentButton">
         <constraints>

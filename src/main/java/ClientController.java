@@ -124,18 +124,37 @@ public class ClientController {
         }
     }
 
-    public synchronized void changeBalance (@NotNull ElementScaffold[] elementBalance) {
-        int productId = 1;
-        for (int i = 0; i < elementBalance.length; i++) {
-            talosRepo.getApi().editProduct(productId, new Product(productId, elementBalance[i].getName(),"Ринстрой", "бу", elementBalance[i].getCount()));
-            productId++;
-            talosRepo.getApi().editProduct(productId, new Product(productId, elementBalance[i].getName(),"Ринстрой", "брак", elementBalance[i].getDefectiveCount()));
-            productId++;
-            talosRepo.getApi().editInfoData(i+1, new InfoData(i+1, elementBalance[i].getName(), elementBalance[i].getWeight(), (elementBalance[i].getBuyingPrice()/100)*115, elementBalance[i].getBuyingPrice(), 0.0));
+    public synchronized void editBalance(@NotNull ElementScaffold[] elementBalance) {
+        try {
+            int productId = 1;
+            for (int i = 0; i < elementBalance.length; i++) {
+                Product normalProduct = new Product(productId, elementBalance[i].getName(),"Ринстрой", "бу", elementBalance[i].getCount());
+                talosRepo.getApi().editProduct(productId, normalProduct).execute();
+                productId++;
+                Product defectiveProduct = new Product(productId, elementBalance[i].getName(),"Ринстрой", "брак", elementBalance[i].getDefectiveCount());
+                talosRepo.getApi().editProduct(productId, defectiveProduct).execute();
+                productId++;
+                talosRepo.getApi().editInfoData(i+1, new InfoData(i+1, elementBalance[i].getName(), elementBalance[i].getWeight(), (elementBalance[i].getBuyingPrice()/100)*115, elementBalance[i].getBuyingPrice(), 0.0)).execute();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
     public synchronized void createOperation (@NotNull StorageOperation operation) {
-        talosRepo.getApi().createOperation(operation);
+        try {
+            talosRepo.getApi().createOperation(operation).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public synchronized void editOperation (@NotNull StorageOperation operation) {
+        try {
+            talosRepo.getApi().editOperation(operation.getId(), operation).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

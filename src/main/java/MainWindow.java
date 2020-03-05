@@ -6,6 +6,8 @@ public class MainWindow extends JFrame {
 
     public MainWindow() {
         DataBaseController.connect();
+        DataBaseController.updateBalance();
+        DataBaseController.updateOperations();
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setBounds(400, 100, 700, 800);
         setExtendedState(MAXIMIZED_BOTH);
