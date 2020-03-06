@@ -157,4 +157,12 @@ public class ClientController {
             e.printStackTrace();
         }
     }
+
+    public synchronized void deleteOperation (@NotNull StorageOperation operation) {
+        try {
+            talosRepo.getApi().deleteOperation(operation.getId()).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

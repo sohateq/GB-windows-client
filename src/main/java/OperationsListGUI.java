@@ -63,6 +63,7 @@ public class OperationsListGUI extends JFrame {
     private JTextField crossbarBadCountTextField;
     private JTextField deckBadCountTextField;
     private JTextField supportBadCountTextField;
+    private JButton deleteOperationButton;
     private MainWindow mainWindow;
     private JFrame fromWindow;
 
@@ -75,6 +76,7 @@ public class OperationsListGUI extends JFrame {
         setBackButtonAction();
         setApplyButtonAction();
         setResetButtonAction();
+        setDeleteOperationButtonAction();
     }
 
     private void setBackButtonAction() {
@@ -90,6 +92,40 @@ public class OperationsListGUI extends JFrame {
 
     private void setResetButtonAction () {
         resetButton.addActionListener(e -> setEmptyComboBoxes());
+    }
+
+    private void setDeleteOperationButtonAction () {
+        deleteOperationButton.addActionListener(e -> {
+            int sure = JOptionPane.showConfirmDialog(this, "Вы уверенны, что хотите удалить операцию? \n Удаленную операцию нельзя востановить!",
+                    "Предупреждение", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (sure == JOptionPane.YES_OPTION) {
+                ListModel<StorageOperation> listModel = operationsList.getModel();
+                int index = operationsList.getSelectedIndex();
+                StorageOperation operation = listModel.getElementAt(index);
+                DataBaseController.deleteOperation(operation);
+                dateTextField.setText("");
+                customerTextField.setText("");
+                typeTextField.setText("");
+                statusTextField.setText("");
+                stairsFrameCountTextField.setText("");
+                passFrameCountTextField.setText("");
+                diagonalConnectionCountTextField.setText("");
+                horizontalConnectionCountTextField.setText("");
+                crossbarCountTextField.setText("");
+                deckCountTextField.setText("");
+                supportCountTextField.setText("");
+                stairsFrameBadCountTextField.setText("");
+                passFrameBadCountTextField.setText("");
+                diagonalConnectionBadCountTextField.setText("");
+                horizontalConnectionBadCountTextField.setText("");
+                crossbarBadCountTextField.setText("");
+                deckBadCountTextField.setText("");
+                supportBadCountTextField.setText("");
+                setEmptyComboBoxes();
+                fillOperationsList();
+                deleteOperationButton.setVisible(false);
+            }
+        });
     }
 
     private void fillOperationsList () {
@@ -139,9 +175,11 @@ public class OperationsListGUI extends JFrame {
             dateTextField.setText(operation.getDate());
             customerTextField.setText(operation.getCustomerName());
             typeTextField.setText(operation.getType());
-            String operationStatus = "не проведено";
-            if (operation.getPerformed()) {
-                operationStatus = "проведено";
+            String operationStatus = "проведено";
+            deleteOperationButton.setVisible(false);
+            if (!operation.getPerformed()) {
+                operationStatus = "не проведено";
+                deleteOperationButton.setVisible(true);
             }
             statusTextField.setText(operationStatus);
             stairsFrameCountTextField.setText(operation.getStairsFrameCount().toString());
@@ -159,7 +197,6 @@ public class OperationsListGUI extends JFrame {
             deckBadCountTextField.setText(operation.getDeckBadCount().toString());
             supportBadCountTextField.setText(operation.getSupportsBadCount().toString());
         });
-
     }
 
     private void fillComboBoxes () {

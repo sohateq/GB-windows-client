@@ -383,4 +383,17 @@ public abstract class DataBaseController {
         }).start();
 
     }
+
+    public static void deleteOperation (StorageOperation operation) {
+        String query  = "DELETE FROM Operations WHERE id = " + operation.getId();
+        try {
+            new Thread(() -> {
+                ClientController.getInstance().deleteOperation(operation);
+            }).start();
+            statement.executeQuery(query);
+            updateOperations();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
