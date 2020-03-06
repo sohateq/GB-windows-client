@@ -175,9 +175,7 @@ public class BalanceGUI extends JFrame {
                 balance[6].setWeight(Double.parseDouble(supportWeightTextField.getText()));
                 balance[6].setBuyingPrice(Double.parseDouble(supportBuyingPriceTextField.getText()));
 
-                ClientController.getInstance().editBalance(balance);
-//                DataBaseController.updateBalance();
-//                loadBalance();
+                DataBaseController.inventory(balance);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "В поля могут быть введены только числа! \n Дробные значения пишите через точку!", "Предупреждение", JOptionPane.ERROR_MESSAGE);
             }

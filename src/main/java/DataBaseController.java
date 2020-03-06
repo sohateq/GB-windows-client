@@ -168,62 +168,32 @@ public abstract class DataBaseController {
         return balance;
     }
 
-    public static List<StorageOperation> getOperations () {
-        List<StorageOperation> operations = new ArrayList<>();
-        try {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Operations ORDER BY date DESC;");
-            while (resultSet.next()) {
-                String date = resultSet.getString("date");
-                String customerName = resultSet.getString("customerName");
-                String type = resultSet.getString("type");
-                int stairsFrameCount = resultSet.getInt("stairsFrameCount");
-                int passFrameCount = resultSet.getInt("passFrameCount");
-                int diagonalConnectionCount = resultSet.getInt("diagonalConnectionCount");
-                int horizontalConnectionCount = resultSet.getInt("horizontalConnectionCount");
-                int crossbarCount = resultSet.getInt("crossbarCount");
-                int deckCount = resultSet.getInt("deckCount");
-                int supportsCount = resultSet.getInt("supportsCount");
-                int stairsFrameBadCount = resultSet.getInt("stairsFrameBadCount");
-                int passFrameBadCount = resultSet.getInt("passFrameBadCount");
-                int diagonalConnectionBadCount = resultSet.getInt("diagonalConnectionBadCount");
-                int horizontalConnectionBadCount = resultSet.getInt("horizontalConnectionBadCount");
-                int crossbarBadCount = resultSet.getInt("crossbarBadCount");
-                int deckBadCount = resultSet.getInt("deckBadCount");
-                int supportsBadCount = resultSet.getInt("supportsBadCount");
-                Boolean performed = false;
-                if (resultSet.getInt("performed") == 1) {
-                    performed = true;
-                }
-                operations.add(new StorageOperation(date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount, deckCount, supportsCount,
-                        stairsFrameBadCount, passFrameBadCount, diagonalConnectionBadCount, horizontalConnectionBadCount, crossbarBadCount, deckBadCount, supportsBadCount, performed));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return operations;
-    }
     public static List<StorageOperation> getOperations (String startDate, String endDate, String customer, String typeF, boolean isPerformed) {
 //        Возвращает лист операций с учетом фильтров, должен работать даже если один, несколько или все фильтры не заданы
         if (startDate == null || startDate.isEmpty()) {
-            startDate = "MIN";
+            startDate = "1970-01-01";
         }
         if (endDate == null || endDate.isEmpty()){
-            endDate = "MAX";
+            endDate = "2050-12-31";
         }
         if (customer != null && !customer.isEmpty()) {
-            customer = " AND customer = '" + customer + "'";
+            customer = " AND customerName = '" + customer + "'";
+        } else {
+            customer = "";
         }
         if (typeF != null && !typeF.isEmpty()) {
             typeF = " AND type = '" + typeF + "'";
+        } else {
+            typeF = "";
         }
         String performed = " AND performed = '1'";
         if (!isPerformed) {
             performed = " AND performed = '0'";
         }
-        String filter = "WHERE (date BETWEEN " + startDate + " AND " + endDate + ")" + customer + typeF + performed;
+        String filter = "WHERE (date BETWEEN '" + startDate + "' AND '" + endDate + "')" + customer + typeF + performed;
         List<StorageOperation> operations = new ArrayList<>();
         try {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Operations" + filter + " ORDER BY date DESC;");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Operations " + filter + " ORDER BY date DESC;");
             while (resultSet.next()) {
                 String date = resultSet.getString("date");
                 String customerName = resultSet.getString("customerName");
@@ -258,18 +228,22 @@ public abstract class DataBaseController {
     public static List<StorageOperation> getOperations (String startDate, String endDate, String customer, String typeF) {
 //        Возвращает лист операций с учетом фильтров, должен работать даже если один, несколько или все фильтры не заданы
         if (startDate == null || startDate.isEmpty()) {
-            startDate = "MIN";
+            startDate = "1970-01-01";
         }
         if (endDate == null || endDate.isEmpty()){
-            endDate = "MAX";
+            endDate = "2050-12-31";
         }
         if (customer != null && !customer.isEmpty()) {
-            customer = " AND customer = '" + customer + "'";
+            customer = " AND customerName = '" + customer + "'";
+        } else {
+            customer = "";
         }
         if (typeF != null && !typeF.isEmpty()) {
             typeF = " AND type = '" + typeF + "'";
+        } else {
+            typeF = "";
         }
-        String filter = "WHERE (date BETWEEN " + startDate + " AND " + endDate + ")" + customer + typeF;
+        String filter = " WHERE (date BETWEEN '" + startDate + "' AND '" + endDate + "')" + customer + typeF;
         List<StorageOperation> operations = new ArrayList<>();
         try {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Operations" + filter + " ORDER BY date DESC;");
@@ -316,7 +290,7 @@ public abstract class DataBaseController {
         }
         return customers;
     }
-    public static List<String> getType () {
+    public static List<String> getTypes () {
         List<String> types = new ArrayList<>();
         try {
             ResultSet resultSet = statement.executeQuery("SELECT DISTINCT type FROM Operations ORDER BY type;");

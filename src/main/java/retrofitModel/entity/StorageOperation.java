@@ -98,27 +98,10 @@ public class StorageOperation {
 
     @Override
     public String toString() {
-        return "StorageOperation{" +
-                "id=" + id +
-                ", date='" + date + '\'' +
-                ", customerName='" + customerName + '\'' +
-                ", type='" + type + '\'' +
-                ", stairsFrameCount=" + stairsFrameCount +
-                ", passFrameCount=" + passFrameCount +
-                ", diagonalConnectionCount=" + diagonalConnectionCount +
-                ", horizontalConnectionCount=" + horizontalConnectionCount +
-                ", crossbarCount=" + crossbarCount +
-                ", deckCount=" + deckCount +
-                ", supportsCount=" + supportsCount +
-                ", stairsFrameBadCount=" + stairsFrameBadCount +
-                ", passFrameBadCount=" + passFrameBadCount +
-                ", diagonalConnectionBadCount=" + diagonalConnectionBadCount +
-                ", horizontalConnectionBadCount=" + horizontalConnectionBadCount +
-                ", crossbarBadCount=" + crossbarBadCount +
-                ", deckBadCount=" + deckBadCount +
-                ", supportsBadCount=" + supportsBadCount +
-                ", performed=" + performed +
-                '}';
+        String string;
+        String [] dateArr = date.split("-");
+        string = dateArr[2] + "." + dateArr[1] + "." + dateArr[0] + ", " + customerName + ", " + type;
+        return string;
     }
 
     public Integer getId() {

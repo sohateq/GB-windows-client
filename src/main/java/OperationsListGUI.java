@@ -1,4 +1,7 @@
+import retrofitModel.entity.StorageOperation;
+
 import javax.swing.*;
+import java.util.List;
 
 public class OperationsListGUI extends JFrame {
     private JPanel RootPanel;
@@ -66,8 +69,12 @@ public class OperationsListGUI extends JFrame {
     public OperationsListGUI(MainWindow mainWindow, JFrame fromWindow) {
         this.mainWindow = mainWindow;
         this.fromWindow = fromWindow;
+        fillComboBoxes();
+        fillOperationsList();
         setContentPane(RootPanel);
         setBackButtonAction();
+        setApplyButtonAction();
+        setResetButtonAction();
     }
 
     private void setBackButtonAction() {
@@ -75,5 +82,137 @@ public class OperationsListGUI extends JFrame {
             mainWindow.setContentPane(fromWindow.getContentPane());
             mainWindow.validate();
         });
+    }
+
+    private void setApplyButtonAction () {
+        applyButton.addActionListener(e -> fillOperationsList());
+    }
+
+    private void setResetButtonAction () {
+        resetButton.addActionListener(e -> setEmptyComboBoxes());
+    }
+
+    private void fillOperationsList () {
+        operationsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        DefaultListModel<StorageOperation> listModel = new DefaultListModel<>();
+        List<StorageOperation> operations;
+        String startYear = (String) startYearComboBox.getSelectedItem();
+        String startMonth = (String) startMonthComboBox.getSelectedItem();
+        String startDay = (String) startDayComboBox.getSelectedItem();
+        String startDate = null;
+        if (!startYear.isEmpty() && !startMonth.isEmpty() && !startDay.isEmpty()) {
+            startDate = startYear + "-" + startMonth + "-" + startDay;
+        }
+        String endYear = (String) endYearComboBox.getSelectedItem();
+        String endMonth = (String) endMonthComboBox.getSelectedItem();
+        String endDay = (String) endDayComboBox.getSelectedItem();
+        String endDate = null;
+        if (!endYear.isEmpty() && !endMonth.isEmpty() && !endDay.isEmpty()) {
+            endDate = endYear + "-" + endMonth + "-" + endDay;
+        }
+        String customer = (String) customersComboBox.getSelectedItem();
+        if (customer.isEmpty()) {
+            customer = null;
+        }
+        String type = (String) typeComboBox.getSelectedItem();
+        if (type.isEmpty()) {
+            type = null;
+        }
+        String status = (String) statusComboBox.getSelectedItem();
+        if (status.isEmpty()) {
+            operations = DataBaseController.getOperations(startDate, endDate, customer, type);
+
+        } else {
+            if (status.equalsIgnoreCase("проведено")) {
+                operations = DataBaseController.getOperations(startDate, endDate, customer, type, true);
+            } else {
+                operations = DataBaseController.getOperations(startDate, endDate, customer, type, false);
+            }
+        }
+        for (int i = 0; i < operations.size(); i++) {
+            listModel.addElement(operations.get(i));
+        }
+        operationsList.setModel(listModel);
+        operationsList.addListSelectionListener(e -> {
+            int index = operationsList.getSelectedIndex();
+            StorageOperation operation = listModel.getElementAt(index);
+            dateTextField.setText(operation.getDate());
+            customerTextField.setText(operation.getCustomerName());
+            typeTextField.setText(operation.getType());
+            String operationStatus = "не проведено";
+            if (operation.getPerformed()) {
+                operationStatus = "проведено";
+            }
+            statusTextField.setText(operationStatus);
+            stairsFrameCountTextField.setText(operation.getStairsFrameCount().toString());
+            passFrameCountTextField.setText(operation.getPassFrameCount().toString());
+            diagonalConnectionCountTextField.setText(operation.getDiagonalConnectionCount().toString());
+            horizontalConnectionCountTextField.setText(operation.getHorizontalConnectionCount().toString());
+            crossbarCountTextField.setText(operation.getCrossbarCount().toString());
+            deckCountTextField.setText(operation.getDeckCount().toString());
+            supportCountTextField.setText(operation.getSupportsCount().toString());
+            stairsFrameBadCountTextField.setText(operation.getStairsFrameBadCount().toString());
+            passFrameBadCountTextField.setText(operation.getPassFrameBadCount().toString());
+            diagonalConnectionBadCountTextField.setText(operation.getDiagonalConnectionBadCount().toString());
+            horizontalConnectionBadCountTextField.setText(operation.getHorizontalConnectionBadCount().toString());
+            crossbarBadCountTextField.setText(operation.getCrossbarBadCount().toString());
+            deckBadCountTextField.setText(operation.getDeckBadCount().toString());
+            supportBadCountTextField.setText(operation.getSupportsBadCount().toString());
+        });
+
+    }
+
+    private void fillComboBoxes () {
+
+        int year = 2019;
+        startYearComboBox.addItem("");
+        endYearComboBox.addItem("");
+        for (int i = 0; i < 20; i++) {
+            startYearComboBox.addItem(year + "");
+            endYearComboBox.addItem(year + "");
+            year++;
+        }
+        startMonthComboBox.addItem("");
+        endMonthComboBox.addItem("");
+        for (int i = 0; i < 12; i++) {
+            String month = String.format("%02d", (i+1));
+            startMonthComboBox.addItem(month);
+            endMonthComboBox.addItem(month);
+        }
+        startDayComboBox.addItem("");
+        endDayComboBox.addItem("");
+        for (int i = 0; i < 31; i++) {
+            String day = String.format("%02d", (i+1));
+            startDayComboBox.addItem(day);
+            endDayComboBox.addItem(day);
+        }
+
+        List<String> customers = DataBaseController.getCustomers();
+        customersComboBox.addItem("");
+        for (int i = 0; i < customers.size(); i++) {
+            customersComboBox.addItem(customers.get(i));
+        }
+
+        List<String> types = DataBaseController.getTypes();
+        typeComboBox.addItem("");
+        for (int i = 0; i < types.size(); i++) {
+            typeComboBox.addItem(types.get(i));
+        }
+
+        statusComboBox.addItem("");
+        statusComboBox.addItem("проведено");
+        statusComboBox.addItem("не проведено");
+    }
+
+    private void setEmptyComboBoxes () {
+        startYearComboBox.setSelectedItem("");
+        startMonthComboBox.setSelectedItem("");
+        startDayComboBox.setSelectedItem("");
+        endYearComboBox.setSelectedItem("");
+        endMonthComboBox.setSelectedItem("");
+        endDayComboBox.setSelectedItem("");
+        customersComboBox.setSelectedItem("");
+        typeComboBox.setSelectedItem("");
+        statusComboBox.setSelectedItem("");
     }
 }
