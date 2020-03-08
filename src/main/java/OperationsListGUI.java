@@ -102,28 +102,38 @@ public class OperationsListGUI extends JFrame {
                 ListModel<StorageOperation> listModel = operationsList.getModel();
                 int index = operationsList.getSelectedIndex();
                 StorageOperation operation = listModel.getElementAt(index);
-                DataBaseController.deleteOperation(operation);
-                dateTextField.setText("");
-                customerTextField.setText("");
-                typeTextField.setText("");
-                statusTextField.setText("");
-                stairsFrameCountTextField.setText("");
-                passFrameCountTextField.setText("");
-                diagonalConnectionCountTextField.setText("");
-                horizontalConnectionCountTextField.setText("");
-                crossbarCountTextField.setText("");
-                deckCountTextField.setText("");
-                supportCountTextField.setText("");
-                stairsFrameBadCountTextField.setText("");
-                passFrameBadCountTextField.setText("");
-                diagonalConnectionBadCountTextField.setText("");
-                horizontalConnectionBadCountTextField.setText("");
-                crossbarBadCountTextField.setText("");
-                deckBadCountTextField.setText("");
-                supportBadCountTextField.setText("");
-                setEmptyComboBoxes();
-                fillOperationsList();
-                deleteOperationButton.setVisible(false);
+                System.out.println(operation.toLongString());
+                int operationID = operation.getId();
+                if (DataBaseController.deleteOperation(operationID)) {
+                    dateTextField.setText("");
+                    customerTextField.setText("");
+                    typeTextField.setText("");
+                    statusTextField.setText("");
+                    stairsFrameCountTextField.setText("");
+                    passFrameCountTextField.setText("");
+                    diagonalConnectionCountTextField.setText("");
+                    horizontalConnectionCountTextField.setText("");
+                    crossbarCountTextField.setText("");
+                    deckCountTextField.setText("");
+                    supportCountTextField.setText("");
+                    stairsFrameBadCountTextField.setText("");
+                    passFrameBadCountTextField.setText("");
+                    diagonalConnectionBadCountTextField.setText("");
+                    horizontalConnectionBadCountTextField.setText("");
+                    crossbarBadCountTextField.setText("");
+                    deckBadCountTextField.setText("");
+                    supportBadCountTextField.setText("");
+                    deleteOperationButton.setVisible(false);
+                    JOptionPane.showMessageDialog(this,
+                            "Операция удалена!",
+                            "Сообщение",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    setEmptyComboBoxes();
+                    fillOperationsList();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Не удалось удалить операцию.", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                }
+
             }
         });
     }

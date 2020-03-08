@@ -195,6 +195,7 @@ public abstract class DataBaseController {
         try {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Operations " + filter + " ORDER BY date DESC;");
             while (resultSet.next()) {
+                int id = resultSet.getInt("id");
                 String date = resultSet.getString("date");
                 String customerName = resultSet.getString("customerName");
                 String type = resultSet.getString("type");
@@ -216,7 +217,7 @@ public abstract class DataBaseController {
                 if (resultSet.getInt("performed") == 1) {
                     operationsIsPerformed = true;
                 }
-                operations.add(new StorageOperation(date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount, deckCount, supportsCount,
+                operations.add(new StorageOperation(id, date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount, deckCount, supportsCount,
                         stairsFrameBadCount, passFrameBadCount, diagonalConnectionBadCount, horizontalConnectionBadCount, crossbarBadCount, deckBadCount, supportsBadCount, operationsIsPerformed));
             }
         } catch (SQLException e) {
@@ -248,6 +249,7 @@ public abstract class DataBaseController {
         try {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Operations" + filter + " ORDER BY date DESC;");
             while (resultSet.next()) {
+                int id = resultSet.getInt("id");
                 String date = resultSet.getString("date");
                 String customerName = resultSet.getString("customerName");
                 String type = resultSet.getString("type");
@@ -269,7 +271,7 @@ public abstract class DataBaseController {
                 if (resultSet.getInt("performed") == 1) {
                     operationsIsPerformed = true;
                 }
-                operations.add(new StorageOperation(date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount, deckCount, supportsCount,
+                operations.add(new StorageOperation(id, date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount, deckCount, supportsCount,
                         stairsFrameBadCount, passFrameBadCount, diagonalConnectionBadCount, horizontalConnectionBadCount, crossbarBadCount, deckBadCount, supportsBadCount, operationsIsPerformed));
             }
         } catch (SQLException e) {
@@ -384,16 +386,18 @@ public abstract class DataBaseController {
 
     }
 
-    public static void deleteOperation (StorageOperation operation) {
-        String query  = "DELETE FROM Operations WHERE id = " + operation.getId();
+    public static boolean deleteOperation (int operationID) {
+        String query  = "DELETE FROM Operations WHERE id = '" + operationID + "';";
         try {
             new Thread(() -> {
-                ClientController.getInstance().deleteOperation(operation);
+                ClientController.getInstance().deleteOperation(operationID);
             }).start();
-            statement.executeQuery(query);
+            statement.execute(query);
             updateOperations();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }

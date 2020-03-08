@@ -158,9 +158,9 @@ public class ClientController {
         }
     }
 
-    public synchronized void deleteOperation (@NotNull StorageOperation operation) {
+    public synchronized void deleteOperation (@NotNull int operationID) {
         try {
-            talosRepo.getApi().deleteOperation(operation.getId()).execute();
+            talosRepo.getApi().deleteOperation(operationID).execute();
         } catch (IOException e) {
             e.printStackTrace();
         }

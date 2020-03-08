@@ -104,6 +104,10 @@ public class StorageOperation {
         return string;
     }
 
+    public String toLongString () {
+        return "id = " + id + ", Date = " + date + " Customer = " + customerName + ", type = " + type + ", performed = " + performed;
+    }
+
     public Integer getId() {
         return id;
     }
