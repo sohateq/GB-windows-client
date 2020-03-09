@@ -14,7 +14,7 @@ public class OperationsListGUI extends JFrame {
     private JLabel typeComboBoxLabel;
     private JComboBox customersComboBox;
     private JComboBox typeComboBox;
-    private JLabel dashLabel;
+    private JLabel toDateLabel;
     private JButton applyButton;
     private JButton resetButton;
     private JLabel infoLabel;
@@ -64,6 +64,7 @@ public class OperationsListGUI extends JFrame {
     private JTextField deckBadCountTextField;
     private JTextField supportBadCountTextField;
     private JButton deleteOperationButton;
+    private JLabel fromDateLabel;
     private MainWindow mainWindow;
     private JFrame fromWindow;
 
