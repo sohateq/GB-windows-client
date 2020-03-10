@@ -136,8 +136,7 @@ public class CustomersListGUI extends JFrame {
             }
             operationsList.setModel(listModel);
             operationsList.addListSelectionListener(e -> {
-                int index = operationsList.getSelectedIndex();
-                StorageOperation operation = listModel.getElementAt(index);
+                StorageOperation operation = (StorageOperation) operationsList.getSelectedValue();
                 stairsFrameCountTextField.setText(operation.getStairsFrameCount().toString());
                 passFrameCountTextField.setText(operation.getPassFrameCount().toString());
                 diagonalConnectionCountTextField.setText(operation.getDiagonalConnectionCount().toString());

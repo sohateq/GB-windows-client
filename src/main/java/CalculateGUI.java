@@ -342,6 +342,10 @@ public class CalculateGUI extends JFrame {
         StorageOperation operation = new StorageOperation(date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount,
                 deckCount, supportCount, stairsFrameBadCount, passFrameBadCount, diagonalConnectionBadCount, horizontalConnectionBadCount, crossbarBadCount, deckBadCount, supportBadCount, performed);
         DataBaseController.operationInsert(operation);
+        JOptionPane.showMessageDialog(this,
+                "Отгрузка создана!",
+                "Сообщение",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void fillComboBoxes () {

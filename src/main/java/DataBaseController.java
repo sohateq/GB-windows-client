@@ -75,7 +75,7 @@ public abstract class DataBaseController {
                 int id = operations.get(i).getId();
                 String date = operations.get(i).getDate();
                 String customerName = operations.get(i).getCustomerName();
-                String type = operations.get(i).getType();
+                String type = operations.get(i).getType().toLowerCase();
                 int stairsFrameCount = operations.get(i).getStairsFrameCount();
                 int passFrameCount = operations.get(i).getPassFrameCount();
                 int diagonalConnectionCount = operations.get(i).getDiagonalConnectionCount();

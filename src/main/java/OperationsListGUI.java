@@ -180,9 +180,9 @@ public class OperationsListGUI extends JFrame {
             listModel.addElement(operations.get(i));
         }
         operationsList.setModel(listModel);
+        operationsList.clearSelection();
         operationsList.addListSelectionListener(e -> {
-            int index = operationsList.getSelectedIndex();
-            StorageOperation operation = listModel.getElementAt(index);
+            StorageOperation operation = (StorageOperation) operationsList.getSelectedValue();
             dateTextField.setText(operation.getDate());
             customerTextField.setText(operation.getCustomerName());
             typeTextField.setText(operation.getType());
