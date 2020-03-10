@@ -400,4 +400,57 @@ public abstract class DataBaseController {
             return false;
         }
     }
+
+    public static void editDefectiveBalance (StorageOperation operation) {
+        new Thread(()->{
+            ElementScaffold [] balance = getBalance();
+            if (operation.getPerformed() && operation.getType().equalsIgnoreCase("восстановление")) {
+                balance[0].countAppend(operation.getStairsFrameCount());
+                balance[0].defectiveCountReduce(operation.getStairsFrameCount());
+                balance[1].countAppend(operation.getPassFrameCount());
+                balance[1].defectiveCountReduce(operation.getPassFrameCount());
+                balance[2].countAppend(operation.getDiagonalConnectionCount());
+                balance[2].defectiveCountReduce(operation.getDiagonalConnectionCount());
+                balance[3].countAppend(operation.getHorizontalConnectionCount());
+                balance[3].defectiveCountReduce(operation.getHorizontalConnectionCount());
+                balance[4].countAppend(operation.getCrossbarCount());
+                balance[4].defectiveCountReduce(operation.getCrossbarCount());
+                balance[5].countAppend(operation.getDeckCount());
+                balance[5].defectiveCountReduce(operation.getDeckCount());
+                balance[6].countAppend(operation.getSupportsCount());
+                balance[6].defectiveCountReduce(operation.getSupportsCount());
+                ClientController.getInstance().editBalance(balance);
+                updateBalance();
+            } else if (operation.getPerformed() && operation.getType().equalsIgnoreCase("брак")) {
+                balance[0].countReduce(operation.getStairsFrameBadCount());
+                balance[0].defectiveCountAppend(operation.getStairsFrameBadCount());
+                balance[1].countReduce(operation.getPassFrameBadCount());
+                balance[1].defectiveCountAppend(operation.getPassFrameBadCount());
+                balance[2].countReduce(operation.getDiagonalConnectionBadCount());
+                balance[2].defectiveCountAppend(operation.getDiagonalConnectionBadCount());
+                balance[3].countReduce(operation.getHorizontalConnectionBadCount());
+                balance[3].defectiveCountAppend(operation.getHorizontalConnectionBadCount());
+                balance[4].countReduce(operation.getCrossbarBadCount());
+                balance[4].defectiveCountAppend(operation.getCrossbarBadCount());
+                balance[5].countReduce(operation.getDeckBadCount());
+                balance[5].defectiveCountAppend(operation.getDeckBadCount());
+                balance[6].countReduce(operation.getSupportsBadCount());
+                balance[6].defectiveCountAppend(operation.getSupportsBadCount());
+                ClientController.getInstance().editBalance(balance);
+                updateBalance();
+            } else if (operation.getPerformed() && operation.getType().equalsIgnoreCase("утилизация")) {
+                balance[0].defectiveCountReduce(operation.getStairsFrameBadCount());
+                balance[1].defectiveCountReduce(operation.getPassFrameBadCount());
+                balance[2].defectiveCountReduce(operation.getDiagonalConnectionBadCount());
+                balance[3].defectiveCountReduce(operation.getHorizontalConnectionBadCount());
+                balance[4].defectiveCountReduce(operation.getCrossbarBadCount());
+                balance[5].defectiveCountReduce(operation.getDeckBadCount());
+                balance[6].defectiveCountReduce(operation.getSupportsBadCount());
+                ClientController.getInstance().editBalance(balance);
+                updateBalance();
+            }
+            ClientController.getInstance().createOperation(operation);
+            updateOperations();
+        }).start();
+    }
 }

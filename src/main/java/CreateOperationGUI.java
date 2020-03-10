@@ -90,6 +90,67 @@ public class CreateOperationGUI extends JFrame {
         typeComboBox.addItem("отгрузка");
         typeComboBox.addItem("возврат");
         typeComboBox.addItem("поступление");
+        typeComboBox.addItem("восстановление");
+        typeComboBox.addItem("брак");
+        typeComboBox.addItem("утилизация");
+        typeComboBox.addActionListener(e -> {
+            if (typeComboBox.getSelectedItem().toString().equals("восстановление")) {
+                countLabel.setVisible(true);
+                stairsFrameCountTextField.setVisible(true);
+                passFrameCountTextField.setVisible(true);
+                diagonalConnectionCountTextField.setVisible(true);
+                horizontalConnectionCountTextField.setVisible(true);
+                crossbarCountTextField.setVisible(true);
+                deckCountTextField.setVisible(true);
+                supportCountTextField.setVisible(true);
+
+                defectiveCountLabel.setVisible(false);
+                stairsFrameDefectiveCountTextField.setVisible(false);
+                passFrameDefectiveCountTextField.setVisible(false);
+                diagonalConnectionDefectiveCountTextField.setVisible(false);
+                horizontalConnectionDefectiveCountTextField.setVisible(false);
+                crossbarDefectiveCountTextField.setVisible(false);
+                deckDefectiveCountTextField.setVisible(false);
+                supportDefectiveCountTextField.setVisible(false);
+            } else if (typeComboBox.getSelectedItem().toString().equals("брак") || typeComboBox.getSelectedItem().toString().equals("утилизация")) {
+                countLabel.setVisible(false);
+                stairsFrameCountTextField.setVisible(false);
+                passFrameCountTextField.setVisible(false);
+                diagonalConnectionCountTextField.setVisible(false);
+                horizontalConnectionCountTextField.setVisible(false);
+                crossbarCountTextField.setVisible(false);
+                deckCountTextField.setVisible(false);
+                supportCountTextField.setVisible(false);
+
+                defectiveCountLabel.setVisible(true);
+                stairsFrameDefectiveCountTextField.setVisible(true);
+                passFrameDefectiveCountTextField.setVisible(true);
+                diagonalConnectionDefectiveCountTextField.setVisible(true);
+                horizontalConnectionDefectiveCountTextField.setVisible(true);
+                crossbarDefectiveCountTextField.setVisible(true);
+                deckDefectiveCountTextField.setVisible(true);
+                supportDefectiveCountTextField.setVisible(true);
+            } else {
+                countLabel.setVisible(true);
+                stairsFrameCountTextField.setVisible(true);
+                passFrameCountTextField.setVisible(true);
+                diagonalConnectionCountTextField.setVisible(true);
+                horizontalConnectionCountTextField.setVisible(true);
+                crossbarCountTextField.setVisible(true);
+                deckCountTextField.setVisible(true);
+                supportCountTextField.setVisible(true);
+
+                defectiveCountLabel.setVisible(true);
+                stairsFrameDefectiveCountTextField.setVisible(true);
+                passFrameDefectiveCountTextField.setVisible(true);
+                diagonalConnectionDefectiveCountTextField.setVisible(true);
+                horizontalConnectionDefectiveCountTextField.setVisible(true);
+                crossbarDefectiveCountTextField.setVisible(true);
+                deckDefectiveCountTextField.setVisible(true);
+                supportDefectiveCountTextField.setVisible(true);
+            }
+            this.validate();
+        });
 
     }
 
@@ -102,6 +163,10 @@ public class CreateOperationGUI extends JFrame {
             String type = typeComboBox.getSelectedItem().toString();
             if (type.equals("поступление")) {
                 customer = "Ринстрой";
+            }
+            boolean isEditDefectiveBalance = type.equals("восстановление") || type.equals("брак") || type.equals("утилизация");
+            if (isEditDefectiveBalance) {
+                customer = "Склад";
             }
             if (day.isEmpty() || month.isEmpty() || year.isEmpty() || customer.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Укажите дату и контрагента", "Предупреждение", JOptionPane.ERROR_MESSAGE);
@@ -138,7 +203,12 @@ public class CreateOperationGUI extends JFrame {
                         deckBadCount,
                         supportBadCount,
                         performed);
-                DataBaseController.createOperation(operation);
+                if (isEditDefectiveBalance) {
+                    DataBaseController.editDefectiveBalance(operation);
+                } else {
+                    DataBaseController.createOperation(operation);
+                }
+
                 JOptionPane.showMessageDialog(this, "Операция создана!", "Сообщение", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (NumberFormatException e) {
