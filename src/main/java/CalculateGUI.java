@@ -1,4 +1,3 @@
-import com.google.gson.annotations.Expose;
 import retrofitModel.entity.StorageOperation;
 
 import javax.swing.*;
@@ -321,31 +320,45 @@ public class CalculateGUI extends JFrame {
     }
 
     private void createOperation () {
-        String date = yearComboBox.getSelectedItem().toString() + "-" + monthComboBox.getSelectedItem().toString() + "-" + dayComboBox.getSelectedItem().toString();
-        String customerName = customersComboBox.getSelectedItem().toString();
-        String type = "отгрузка";
-        int stairsFrameCount = Integer.parseInt(stairsFrameCountTextField.getText());
-        int passFrameCount = Integer.parseInt(passFrameCountTextField.getText());
-        int diagonalConnectionCount = Integer.parseInt(diagonalConnectionCountTextField.getText());
-        int horizontalConnectionCount = Integer.parseInt(horizontalConnectionCountTextField.getText());
-        int crossbarCount = Integer.parseInt(crossbarCountTextField.getText());
-        int deckCount = Integer.parseInt(deckCountTextField.getText());
-        int supportCount = Integer.parseInt(supportCountTextField.getText());
-        int stairsFrameBadCount = 0;
-        int passFrameBadCount = 0;
-        int diagonalConnectionBadCount = 0;
-        int horizontalConnectionBadCount = 0;
-        int crossbarBadCount = 0;
-        int deckBadCount = 0;
-        int supportBadCount = 0;
-        boolean performed = false;
-        StorageOperation operation = new StorageOperation(date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount,
-                deckCount, supportCount, stairsFrameBadCount, passFrameBadCount, diagonalConnectionBadCount, horizontalConnectionBadCount, crossbarBadCount, deckBadCount, supportBadCount, performed);
-        DataBaseController.operationInsert(operation);
-        JOptionPane.showMessageDialog(this,
-                "Отгрузка создана!",
-                "Сообщение",
-                JOptionPane.INFORMATION_MESSAGE);
+        try {
+            String date = yearComboBox.getSelectedItem().toString() + "-" + monthComboBox.getSelectedItem().toString() + "-" + dayComboBox.getSelectedItem().toString();
+            String customerName = customersComboBox.getSelectedItem().toString();
+            if (customerName.isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "Укажите клиента!",
+                        "Предупреждение",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            String type = "отгрузка";
+            int stairsFrameCount = Integer.parseInt(stairsFrameCountTextField.getText());
+            int passFrameCount = Integer.parseInt(passFrameCountTextField.getText());
+            int diagonalConnectionCount = Integer.parseInt(diagonalConnectionCountTextField.getText());
+            int horizontalConnectionCount = Integer.parseInt(horizontalConnectionCountTextField.getText());
+            int crossbarCount = Integer.parseInt(crossbarCountTextField.getText());
+            int deckCount = Integer.parseInt(deckCountTextField.getText());
+            int supportCount = Integer.parseInt(supportCountTextField.getText());
+            int stairsFrameBadCount = 0;
+            int passFrameBadCount = 0;
+            int diagonalConnectionBadCount = 0;
+            int horizontalConnectionBadCount = 0;
+            int crossbarBadCount = 0;
+            int deckBadCount = 0;
+            int supportBadCount = 0;
+            boolean performed = false;
+            StorageOperation operation = new StorageOperation(date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount,
+                    deckCount, supportCount, stairsFrameBadCount, passFrameBadCount, diagonalConnectionBadCount, horizontalConnectionBadCount, crossbarBadCount, deckBadCount, supportBadCount, performed);
+            DataBaseController.createOperation(operation);
+            JOptionPane.showMessageDialog(this,
+                    "Отгрузка создана!",
+                    "Сообщение",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Количетво элементов должно быть указанно цифрами",
+                    "Предупреждение",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void fillComboBoxes () {

@@ -144,7 +144,7 @@ public class ShipmentListGUI extends JFrame {
         boolean performed = true;
         StorageOperation performingOperation = new StorageOperation(idOperation, date, customerName, type, stairsFrameCount, passFrameCount, diagonalConnectionCount, horizontalConnectionCount, crossbarCount,
                 deckCount, supportCount, stairsFrameBadCount, passFrameBadCount, diagonalConnectionBadCount, horizontalConnectionBadCount, crossbarBadCount, deckBadCount, supportBadCount, performed);
-        DataBaseController.operationPerform(performingOperation);
+        DataBaseController.performOperation(performingOperation);
         JOptionPane.showMessageDialog(this,
                 "Отгрузка помечана, как \"исполнено\".",
                 "Сообщение",
