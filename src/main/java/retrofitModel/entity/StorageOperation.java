@@ -98,26 +98,89 @@ public class StorageOperation {
 
     @Override
     public String toString() {
-        return "StorageOperation{" +
-                "id=" + id +
-                ", date='" + date + '\'' +
-                ", customerName='" + customerName + '\'' +
-                ", type='" + type + '\'' +
-                ", stairsFrameCount=" + stairsFrameCount +
-                ", passFrameCount=" + passFrameCount +
-                ", diagonalConnectionCount=" + diagonalConnectionCount +
-                ", horizontalConnectionCount=" + horizontalConnectionCount +
-                ", crossbarCount=" + crossbarCount +
-                ", deckCount=" + deckCount +
-                ", supportsCount=" + supportsCount +
-                ", stairsFrameBadCount=" + stairsFrameBadCount +
-                ", passFrameBadCount=" + passFrameBadCount +
-                ", diagonalConnectionBadCount=" + diagonalConnectionBadCount +
-                ", horizontalConnectionBadCount=" + horizontalConnectionBadCount +
-                ", crossbarBadCount=" + crossbarBadCount +
-                ", deckBadCount=" + deckBadCount +
-                ", supportsBadCount=" + supportsBadCount +
-                ", performed=" + performed +
-                '}';
+        String string;
+        String [] dateArr = date.split("-");
+        string = dateArr[2] + "." + dateArr[1] + "." + dateArr[0] + ", " + customerName + ", " + type;
+        return string;
+    }
+
+    public String toLongString () {
+        return "id = " + id + ", Date = " + date + " Customer = " + customerName + ", type = " + type + ", performed = " + performed;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Integer getStairsFrameCount() {
+        return stairsFrameCount;
+    }
+
+    public Integer getPassFrameCount() {
+        return passFrameCount;
+    }
+
+    public Integer getDiagonalConnectionCount() {
+        return diagonalConnectionCount;
+    }
+
+    public Integer getHorizontalConnectionCount() {
+        return horizontalConnectionCount;
+    }
+
+    public Integer getCrossbarCount() {
+        return crossbarCount;
+    }
+
+    public Integer getDeckCount() {
+        return deckCount;
+    }
+
+    public Integer getSupportsCount() {
+        return supportsCount;
+    }
+
+    public Integer getStairsFrameBadCount() {
+        return stairsFrameBadCount;
+    }
+
+    public Integer getPassFrameBadCount() {
+        return passFrameBadCount;
+    }
+
+    public Integer getDiagonalConnectionBadCount() {
+        return diagonalConnectionBadCount;
+    }
+
+    public Integer getHorizontalConnectionBadCount() {
+        return horizontalConnectionBadCount;
+    }
+
+    public Integer getCrossbarBadCount() {
+        return crossbarBadCount;
+    }
+
+    public Integer getDeckBadCount() {
+        return deckBadCount;
+    }
+
+    public Integer getSupportsBadCount() {
+        return supportsBadCount;
+    }
+
+    public Boolean getPerformed() {
+        return performed;
     }
 }

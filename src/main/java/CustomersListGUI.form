@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.CustomersListGUI">
-  <grid id="27dc6" binding="rootPane" layout-manager="GridLayoutManager" row-count="6" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="CustomersListGUI">
+  <grid id="27dc6" binding="RootPanel" layout-manager="GridLayoutManager" row-count="4" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="1555" height="413"/>
@@ -28,7 +28,7 @@
       </component>
       <scrollpane id="d0a71" binding="customersListScrollPane">
         <constraints>
-          <grid row="1" column="0" row-span="5" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="1" column="0" row-span="3" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="200" height="128"/>
           </grid>
         </constraints>
@@ -49,60 +49,17 @@
           <text value="Клиент: "/>
         </properties>
       </component>
-      <component id="bf036" class="javax.swing.JLabel" binding="phoneCustomerLabel">
-        <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Телефон: "/>
-        </properties>
-      </component>
-      <component id="7f9c5" class="javax.swing.JLabel" binding="addressCustomerLabel">
-        <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Адрес: "/>
-        </properties>
-      </component>
       <component id="288b8" class="javax.swing.JLabel" binding="operationsLabel">
         <constraints>
-          <grid row="4" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Операции: "/>
         </properties>
       </component>
-      <component id="67571" class="javax.swing.JTextArea" binding="nameCustomerTextArea">
-        <constraints>
-          <grid row="1" column="2" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="10"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="5a216" class="javax.swing.JTextArea" binding="phoneCustomerTextArea">
-        <constraints>
-          <grid row="2" column="2" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="4a72a" class="javax.swing.JTextArea" binding="addressCustomerTextArea">
-        <constraints>
-          <grid row="3" column="2" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="10"/>
-          </grid>
-        </constraints>
-        <properties>
-          <lineWrap value="true"/>
-          <wrapStyleWord value="true"/>
-        </properties>
-      </component>
       <scrollpane id="5036c" binding="operationsScrollPane">
         <constraints>
-          <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
@@ -115,7 +72,7 @@
       </scrollpane>
       <component id="27638" class="javax.swing.JLabel" binding="operationsContentLabel">
         <constraints>
-          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Содержание операции:"/>
@@ -131,7 +88,7 @@
       </component>
       <component id="9c99f" class="javax.swing.JLabel" binding="customerBalanceLabel">
         <constraints>
-          <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Остаток у клиента:"/>
@@ -140,7 +97,7 @@
       <grid id="97914" binding="InfoPane" layout-manager="GridLayoutManager" row-count="7" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
@@ -207,7 +164,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="458d1" class="javax.swing.JTextField" binding="passFrameCountTextField">
             <constraints>
@@ -215,7 +175,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="95a41" class="javax.swing.JTextField" binding="diagonalConnectionCountTextField">
             <constraints>
@@ -223,7 +186,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="f96d5" class="javax.swing.JTextField" binding="horizontalConnectionCountTextField">
             <constraints>
@@ -231,7 +197,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="87315" class="javax.swing.JTextField" binding="crossbarCountTextField">
             <constraints>
@@ -239,7 +208,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="34420" class="javax.swing.JTextField" binding="deckCountTextField">
             <constraints>
@@ -247,7 +219,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="f3a39" class="javax.swing.JTextField" binding="supportCountTextField">
             <constraints>
@@ -255,7 +230,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="7f0ce" class="javax.swing.JLabel" binding="stairsFrameBadCountLabel">
             <constraints>
@@ -319,7 +297,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="eb00e" class="javax.swing.JTextField" binding="passFrameBadCountTextField">
             <constraints>
@@ -327,7 +308,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="39e4e" class="javax.swing.JTextField" binding="diagonalConnectionBadCountTextField">
             <constraints>
@@ -335,7 +319,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="b5933" class="javax.swing.JTextField" binding="horizontalConnectionBadCountTextField">
             <constraints>
@@ -343,7 +330,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="da168" class="javax.swing.JTextField" binding="crossbarBadCountTextField">
             <constraints>
@@ -351,7 +341,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="b050e" class="javax.swing.JTextField" binding="deckBadCountTextField">
             <constraints>
@@ -359,7 +352,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="d9d6c" class="javax.swing.JTextField" binding="supportBadCountTextField">
             <constraints>
@@ -367,14 +363,17 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
         </children>
       </grid>
       <grid id="4a04d" binding="CustomersBalance" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
@@ -441,7 +440,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="27425" class="javax.swing.JTextField" binding="passFrameBalanceTextField">
             <constraints>
@@ -449,7 +451,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="8adef" class="javax.swing.JTextField" binding="diagonalConnectionBalanceTextField">
             <constraints>
@@ -457,7 +462,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="66fcc" class="javax.swing.JTextField" binding="horizontalConnectionBalanceTextField">
             <constraints>
@@ -465,7 +473,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="65748" class="javax.swing.JTextField" binding="crossbarBalanceTextField">
             <constraints>
@@ -473,7 +484,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="93d7f" class="javax.swing.JTextField" binding="deckBalanceTextField">
             <constraints>
@@ -481,7 +495,10 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="74a64" class="javax.swing.JTextField" binding="supportBalanceTextField">
             <constraints>
@@ -489,10 +506,23 @@
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <text value="0"/>
+            </properties>
           </component>
         </children>
       </grid>
+      <component id="d8302" class="javax.swing.JTextField" binding="nameCustomerTextField">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="200" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>
