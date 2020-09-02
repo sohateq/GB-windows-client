@@ -305,9 +305,8 @@ public abstract class DataBaseController {
         return types;
     }
 
-// Оба следующих метода не должны выполняться одновременно
+
     public static void createOperation(StorageOperation operation) {
-//        Добавляет в локальную и серверную базу данных операций новую операцию (лучше сделать в отдельном потоке)
         new Thread(()->{
             if (operation.getPerformed() && operation.getType().equalsIgnoreCase("отгрузка")) {
                 ElementScaffold [] balance = getBalance();
